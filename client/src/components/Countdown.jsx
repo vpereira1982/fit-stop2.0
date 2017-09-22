@@ -1,5 +1,5 @@
 var Countdown = (props) => (
-  <div class="Countdown">
+  <div className="countdown">
   Countdown View Here
   </div>
 );
