@@ -22,7 +22,16 @@ var exerciseSchema = new Schema({
   Difficulty: String
 })
 
+var userSchema = new Schema({
+  username: String,
+  Password: String,
+  Preferences: {},
+  workoutHistory: []
+})
+
 var Exercise = mongoose.model('Exercise', exerciseSchema);
+var User = mongoose.model('User', userSchema);
 
 module.exports.exerciseModel = Exercise;
+module.exports.userModel = User;
 module.exports.mongoose = mongoose;
