@@ -1,5 +1,5 @@
 var Workout = (props) => (
-  <div className="">
+  <div className="workout">
   Workout View Here
   <Countdown count= {props.count} />
   <Timer timer= {props.timer} />
