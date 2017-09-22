@@ -1,4 +1,3 @@
-
 class App extends React.Component {
   constructor() {
     super();
@@ -8,10 +7,10 @@ class App extends React.Component {
     return (
       <div>
     	<h1>Hi</h1>
+      <Workout />
       </div>
     )
   }
 }
 
 window.App = App;
-// ReactDOM.render(<App />, document.getElementById('root'));
