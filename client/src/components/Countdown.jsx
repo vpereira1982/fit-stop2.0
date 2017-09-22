@@ -1,6 +1,7 @@
 var Countdown = (props) => (
-  <div class="Countdown">
+  <div className="Countdown">
   Countdown View Here
+  {props.count};
   </div>
 );
 
