@@ -5,7 +5,7 @@ var Summary = (props) => (
     <span className="summaryTime">Total Time: 15:00 </span> <br />
     <span className="summaryWorkoutType">Workout Type: Upper Body</span> <br />
     <span className="summaryExercisesCompleted">Exercises Completed: Push Ups, Pull Ups, More Push Ups, Some Other Stuff</span> <br />
-    <button className="blackButton">Back To Dashboard</button>
+    <button onClick={props.goToDashboard} className="blackButton">Back To Dashboard</button>
   </div>
 );
 

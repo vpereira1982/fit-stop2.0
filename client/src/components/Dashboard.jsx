@@ -1,11 +1,10 @@
 var Dashboard = (props) => (
-	<div className="dashboard">
+  <div className="dashboard">
 		<h1>Start Workout</h1>
 	    <div className="startButton">
-		    <a href="http://example.com"> 
-		        <img src="../src/images/pizzablack.png" alt="Start"/> </a>
-		</div>
-	    <History />
+		    <img onClick= {props.goToCountdown} src="../src/images/pizzablue.png" alt="Start"/>
+		  </div>
+	  <History />
 	</div>
 );
 
