@@ -9,6 +9,7 @@ class App extends React.Component {
     	<Header />
       <Dashboard />
       <Workout />
+      <Summary />
       </div>
     )
   }

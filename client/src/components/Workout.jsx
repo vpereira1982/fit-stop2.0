@@ -1,10 +1,11 @@
 var Workout = (props) => (
   <div className="workout">
-  Workout View Here
-  <Countdown />
-  <Timer />
-  <Exercise />
-  <Summary />
+    <h1>Upper Body </h1>
+   
+    <Exercise />
+    <Timer /> 
+    <Countdown />
+
 
   </div>
 );
