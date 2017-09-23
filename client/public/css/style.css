@@ -7,6 +7,8 @@ body {
   background-image: url(../images/bg.png);
 }
 
+.hidden { display:none; }
+
 .App {
   width: 60%;
   margin: auto;
@@ -123,17 +125,9 @@ body {
   height: auto;
 }
 
-.warmupTitle, .workoutTitle, .cooldownTitle {
-  color: gray;
-  font-size: 35px;
-  padding: 15px;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
+.workoutTitle {
 
-.activeTitle {
-  color: black;
-  background-color: rgba(211, 211, 211, .6);
+
 }
 
 .exerciseName {
