@@ -34,13 +34,14 @@ class App extends React.Component {
   render() {
     return (
       <div className = "App">
-    	<Header handleLoginClick={this.handleLoginClick} handleLogoutClick={this.handleLogoutClick} />
-      <Dashboard handleWorkoutStartClick={this.handleWorkoutStartClick} />
-      <Workout handleWorkoutFinish={this.handleWorkoutFinish} />
-      <Summary handleBackToDashBoardClick={this.handleBackToDashBoardClick} />
+      	<Header handleLoginClick={this.handleLoginClick} handleLogoutClick={this.handleLogoutClick} />
+        <Dashboard handleWorkoutStartClick={this.handleWorkoutStartClick} />
+        <Workout exercises={['a','b', 'c']} timer={15} count={3} handleWorkoutFinish={this.handleWorkoutFinish} />
+        <Summary handleBackToDashBoardClick={this.handleBackToDashBoardClick} />
       </div>
     )
   }
+
 }
 
 window.App = App;
