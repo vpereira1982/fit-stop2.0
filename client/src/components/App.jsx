@@ -1,28 +1,43 @@
 class App extends React.Component {
   constructor() {
     super();
-    //countdown numbers
-    //workout timer
+    this.state = {
+      isLoggedin: true, //should all start off false, marking dashboard true after this becomes true
+      displayDashboard: true,
+      displayWorkout: false,
+      displaySummary: false
+    };
   }
 
-  //getExercises
+  handleLoginClick = () => {
+    this.setState({isLoggedin: true});
+  };
 
-  //start countdown
+  handleLogoutClick = () => {
+    this.setState({isLoggedIn: false});
+  };
 
-  //start timer
+  handleWorkoutStartClick = () => {
+    this.setState({displayDashboard: false, displayWorkout: true });
+  };
 
-  //
+  handleWorkoutFinish = () => {
+    this.setState({displayWorkout: false, displaySummary: true});
+  };
+
+  handleBackToDashBoardClick = () => {
+    this.setState({displaySummary: false, displayDashboard: true});
+  };
+
+
 
   render() {
     return (
-      <div>
-        <h1>Hi</h1>
-        <div className = "App">
-          <Header />
-          <Dashboard />
-          <Workout exercises={['a','b', 'c']} timer={15} count={3} />
-          <Summary />
-        </div>
+      <div className = "App">
+      	<Header handleLoginClick={this.handleLoginClick} handleLogoutClick={this.handleLogoutClick} />
+        <Dashboard handleWorkoutStartClick={this.handleWorkoutStartClick} />
+        <Workout exercises={['a','b', 'c']} timer={15} count={3} handleWorkoutFinish={this.handleWorkoutFinish} />
+        <Summary handleBackToDashBoardClick={this.handleBackToDashBoardClick} />
       </div>
     )
   }
