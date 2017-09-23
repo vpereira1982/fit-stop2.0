@@ -1,6 +1,6 @@
 var Timer = (props) => (
-  <div className="">
-  Timer Display Here
+  <div className="timerCircle">
+    <span className="countNumbers">14:01</span>
   </div>
 );
 
