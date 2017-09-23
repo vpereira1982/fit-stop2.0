@@ -1,6 +1,9 @@
 var Countdown = (props) => (
-  <div className="countdownCircle">
-    <span className="countNumbers">{props.count}</span>
+  <div className="countdown">
+    <div className="countdownCircle">
+      <span className="countdownNumber">{props.countdown}</span>
+    </div>
+
   </div>
 );
 

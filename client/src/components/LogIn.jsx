@@ -1,9 +1,9 @@
-var LogIn = (props) => (
+var Login = (props) => (
 
 	  <div className="login">
-	    <h3> LogIn </h3>
+	    <h3> Login </h3>
 	  </div>
 );
 
 
-window.LogIn = LogIn;
+window.Login = Login;
