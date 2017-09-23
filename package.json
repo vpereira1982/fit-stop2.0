@@ -8,7 +8,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "prestart": "babel ./client/src/ --out-dir client/public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
+    "prestart": "babel ./client/src --out-dir client/public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
     "start": "node ./server/server.js"
   },
   "dependencies": {
