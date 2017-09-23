@@ -7,13 +7,15 @@ body {
   background-image: url(../images/bg.png);
 }
 
+.hidden { display:none; }
+
 .App {
-  width: 53%;
+  width: 60%;
   margin: auto;
 }
 
 .header {
-  background-color: #222;
+  background-color: #3b8fb5;
   height: 40px;
   padding: 12px;
   padding-bottom: 40px;
@@ -22,12 +24,16 @@ body {
   border-radius: 15px;
 }
 
-.dashboard, .workout, .summary {
+.dashboard, .workout, .summary, .countdown{
   background-color: rgba(255, 255, 255, .5);
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.workout img {
+  max-width: 85%
 }
 
 .history {
@@ -103,7 +109,7 @@ body {
   border-radius: 50%;
   border: 5px solid #f5f5f5;
   overflow: hidden;
-  background: #3b8fb5;
+  background: #fff;
   box-shadow: 0 0 35px gray;
   margin: auto;
 }
@@ -118,7 +124,12 @@ body {
   padding: 12%;
   height: auto;
 }
-  
+
+.workoutTitle {
+
+
+}
+
 .exerciseName {
   color: #3b8fb5;
   font-weight: bold;
@@ -138,54 +149,54 @@ body {
 }
 
 .countdownCircle {
-  width: 15%;
+  background-image: url(../images/pizzagif.gif);
+  width: 40%;
   height: 0;
-  padding-bottom: 15%;
+  padding-bottom: 40%;
   border-radius: 50%;
   border: 5px solid #f5f5f5;
   overflow: hidden;
-  background: #000;
   box-shadow: 0 0 35px gray;
   margin: auto;
   font-weight: bold;
-  font-size: 45px;
-  color: #fff;
+  font-size: 120px;
+  color: #000;
   display: inline-block;
 }
 
-.countdownCircle:hover {
-  background-image: url(../images/pizzagif.gif);
-  color: #000;
+.countdownNumber {
+  position: relative;
+  top: 50%;
+  transform: translateY(50%);
+  display: block;
 }
 
 .timerCircle {
-  width: 15%;
+  width: 25%;
   height: 0;
   padding-bottom: 15%;
-  border-radius: 50%;
-  border: 5px solid #f5f5f5;
+  border-radius: 10%;
   overflow: hidden;
-  background: #3b8fb5;
-  box-shadow: 0 0 35px gray;
-  margin: auto;
-  margin-right: 20px;
   font-weight: bold;
   font-size: 45px;
   color: #000;
   display: inline-block;
+  float: right;
+
+
 }
 
 .timerCircle:hover {
   background-image: url(../images/pizzagif.gif);
 }
 
-.countNumbers {
+/*.timerNumber {
   position: relative;
   top: 50%;
-  transform: translateY(70%);
+  transform: translateY(45%);
   display: block;
 }
-
+*/
 .summaryCongrats {
   font-weight: bold;
   font-size: 45px;

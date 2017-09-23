@@ -1,11 +1,13 @@
 var Workout = (props) => (
   <div className="workout">
-    <h1>Upper Body </h1>
-   
-    <Exercise />
-    <Timer /> 
-    <Countdown />
+  <Timer timer= {props.timer} />
+    <h1 className='workoutTitle'>Upper Body </h1>
 
+
+
+
+  <Exercise exercise= {props.exercise} />
+  <button onClick={props.goToSummary} className="blackButton">Summary</button>
   </div>
 );
 
