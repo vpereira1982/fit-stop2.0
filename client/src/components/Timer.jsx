@@ -1,7 +1,6 @@
 var Timer = (props) => (
-  <div className="">
-  Timer Display Here
-  {props.timer}
+  <div className="timerCircle">
+    <span className="countNumbers">{props.timer}</span>
   </div>
 );
 

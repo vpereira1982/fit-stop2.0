@@ -18,10 +18,10 @@ class App extends React.Component {
       <div>
         <h1>Hi</h1>
         <div className = "App">
-        <Header />
-        <Dashboard />
-        <Workout exercises={['a','b', 'c']} timer={15} count={3} />
-
+          <Header />
+          <Dashboard />
+          <Workout exercises={['a','b', 'c']} timer={15} count={3} />
+          <Summary />
         </div>
       </div>
     )
