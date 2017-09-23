@@ -16,13 +16,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-    	<h1>Hi</h1>
-      <Workout exercises={['a','b', 'c']} timer={15} count={3} />
+        <h1>Hi</h1>
+        <div className = "App">
+        <Header />
+        <Dashboard />
+        <Workout exercises={['a','b', 'c']} timer={15} count={3} />
 
-      <div className = "App">
-    	<Header />
-      <Dashboard />
-      <Workout />
+        </div>
       </div>
     )
   }
