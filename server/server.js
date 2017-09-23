@@ -2,6 +2,7 @@ var express = require('express')
 var db = require('./db').mongoose;
 var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
+var path = require('path');
 
 //import database info
 
@@ -11,6 +12,8 @@ var User = require('./db').userModel;
 
 var app = express();
 app.listen(3000);
+app.use(express.static('client'));
+
 console.log('server is running');
 
 //testing db
@@ -51,7 +54,7 @@ console.log('server is running');
 
 //get workout
 
-function getWorkout(req,res){
+function getWorkout(req,res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
   var workoutData = {};
 
   Exercise.findOne({type: 'warmup'},function(err,data){
@@ -59,30 +62,42 @@ function getWorkout(req,res){
       console.log(err)
     } else {
       workoutData.warmup = data;
+      Exercise.findOne({type: 'workout'},function(err,data){
+        if(err) {
+          console.log(err)
+        } else {
+          workoutData.workout = data;
+          Exercise.findOne({type: 'cooldown'},function(err,data){
+            if(err) {
+              console.log(err)
+            } else {
+              workoutData.cooldown = data;
+              if( workoutData.warmup && workoutData.workout && workoutData.cooldown) {
+                    res.send(200, workoutData)
+                    
+                  } else {
+                    res.send(200, workoutData)
+                  }
+            }
+          })
+        }
+      })
     }
   })
 
-  Exercise.findOne({type: 'workout'},function(err,data){
-    if(err) {
-      console.log(err)
-    } else {
-      workoutData.workout = data;
-    }
-  })
+  
+  
 
-  Exercise.findOne({type: 'cooldown'},function(err,data){
-    if(err) {
-      console.log(err)
-    } else {
-      workoutData.cooldown = data;
-    }
-  })
+  
 
-  if(workoutData.warmup && workoutData.workout && workoutData.cooldown) { // if the
-    res.send(200, workoutData)
-    console.log(workoutData);
-  }
+  // if(workoutData.workout) { // if the 
+  //   res.send(200, workoutData)
+    
+  // } else {
+  //   res.send(200, 'testing')
+  // }
 }
+
 
 app.get('/workout', getWorkout);
 app.get('/history',()=>{})
