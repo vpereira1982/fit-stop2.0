@@ -6,7 +6,6 @@ var Workout = (props) => (
     <Timer /> 
     <Countdown />
 
-
   </div>
 );
 
