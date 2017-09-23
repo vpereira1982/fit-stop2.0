@@ -1,7 +1,7 @@
 var Workout = (props) => (
   <div className="workout">
   <Timer timer= {props.timer} />
-    <h1 className='workoutTitle'>Upper Body </h1>
+    <h1 className='workoutTitle'>Warmup </h1>
 
 
 
