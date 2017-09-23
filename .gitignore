@@ -6,3 +6,7 @@
 /server/dbInfo.js
 
 /client/compiled
+
+.flooignore
+
+.floo
