@@ -15,7 +15,9 @@ app.listen(3000);
 app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
+
 app.use('/jquery', express.static('node_modules/jquery/dist'));
+
 console.log('server is running');
 
 
@@ -65,6 +67,7 @@ console.log('server is running');
 //     }
 //   })
 
+
   // {
   //   warmup: [
   //   ],
@@ -73,13 +76,13 @@ console.log('server is running');
   //   cooldown: [
   //   ]
   // }
-
 // }
 
-getWorkout(obj, res) {
 
-}
 
+app.get('/', (req,res)=>{
+  res.sendFile('index.html', { root: 'client/public'});
+});
 
 
 
