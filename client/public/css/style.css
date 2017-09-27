@@ -170,18 +170,20 @@ body {
   overflow: hidden;
   box-shadow: 0 0 35px gray;
   margin: auto;
-  font-weight: bold;
-  font-size: 120px;
-  color: #000;
-  display: inline-block;
   margin-bottom: 20px;
+  position: relative;
+
 }
 
 .countdownNumber {
-  position: relative;
+  position: absolute;
   top: 50%;
-  transform: translateY(19%);
-  display: block;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 8em;
+  color: #000;
+
 
 }
 
