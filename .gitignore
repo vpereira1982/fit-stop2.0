@@ -6,7 +6,7 @@
 /server/dbInfo.js
 /server/seedDb.js
 
-/client/compiled/
+/client/public/compiled/
 
 /.flooignore
 
