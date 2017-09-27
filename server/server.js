@@ -23,14 +23,6 @@ console.log('server is running');
 
 // define api routes here
 
-function getWorkouts(req,res){
-  var returnObj = {
-    warmup: [],
-    workout: [],
-    cooldown: []
-  }
-
-
 // function getWorkout(obj, res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
 //   Exercise.findOne({type: 'warmup'},function(err,data){
 //     if(err) {
@@ -74,7 +66,7 @@ function getWorkouts(req,res){
 //   })
 
 
-function getWorkout(req,res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
+function getWorkout(req,res) { // this disgusting, callback infected function grabs random workout data and sends it to the front for us
   var workoutData = {};
 
   Exercise.findOne({type: 'warmup'},function(err,data){
@@ -113,30 +105,14 @@ function getWorkout(req,res){ // this disgusting, callback infected function gra
               console.log('exercise data sent succesfully');
               res.status('200').send(returnObj);
             }
-          })
-        }
-      })
-    }
-  })
+          }) //exercise.find
+        } //else
+      }) // exercise.find
+    } //else
+  }) //find
 
-
-
-  // {
-  //   warmup: [
-  //   ],
-  //   workout: [
-  //   ],
-  //   cooldown: [
-  //   ]
-  // }
-
-// }
-
-
-
-
-
-}
+  }) //find one
+} //function get workout
 
 
 app.get('/', (req,res)=>{
@@ -158,4 +134,5 @@ app.get('/history',(req,res)=>{
   })
 })
 
-app.post('/addworkout',()=>{})
+app.post('/addworkout',()=>{});
+

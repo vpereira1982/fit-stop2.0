@@ -31,15 +31,15 @@ body {
 }
 
 .workout {
-  padding-top: 35px;
-
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
 .workout img {
   max-width: 85%
 }
 
-.summary {
+.summary, .countdown {
   padding-bottom: 60px;
 }
 
@@ -47,9 +47,10 @@ body {
   background-color: rgba(211, 211, 211, .6);
   border-radius: 15px;
   padding: 15px;
+  padding-top: 5px;
+  padding-bottom: 30px;
   margin-bottom: 20px;
   margin-top: 50px;
-  padding-bottom: 30px;
 }
 
 .login {
@@ -165,7 +166,7 @@ body {
   padding: 45px 20px;
   margin-bottom: 20px;
   margin-top: 10px;
-
+}
 
 .countdownCircle {
   background-image: url(../images/pizzagif.gif);
@@ -177,12 +178,11 @@ body {
   overflow: hidden;
   box-shadow: 0 0 35px gray;
   margin: auto;
+  position: relative;
 
 }
 
 .countdownNumber {
-
-  font-size: 2.5em;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -203,6 +203,21 @@ body {
   background-image: url(../images/pizzagif.gif);
 }
 
+
+.summaryStats {
+  width: 85%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: left;
+  padding-left: 10px;
+}
+
 .summaryCongrats {
   font-weight: bold;
   font-size: 45px;
@@ -211,17 +226,6 @@ body {
   display: inline-block;
 }
 
-.summaryStats {
-  background-color: rgba(211, 211, 211, .6);
-  border-radius: 10px;
-  border-width: 1px;
-  border-color: black;
-  border-style: solid;
-  margin-bottom: 5px;
-  text-align: left;
-  padding-left: 10px;
-}
-
 .congratulations:hover {
   background-image: url(../images/pizzagif.gif);
 }
@@ -230,16 +234,8 @@ body {
   background-image: url(../images/pizzagif.gif);
 }
 
-.summaryTime {
-  font-weight: bold;
-  font-size: 30px;
-  color: #000;
-}
-
-.summaryWorkoutType {
-  font-weight: bold;
-  font-size: 30px;
-  color: #000;
+.summaryTitle {
+  color: #3b8fb5;
 }
 
 .summaryQuote {
@@ -247,6 +243,27 @@ body {
   font-size: 35px;
   display: inline-block;
   padding: 15px;
+  margin-top: 5px;
+}
+
+.backToDashboardButton {
+  background-color: #000000;
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: center;
+}
+
+.backToDashboardButton :hover {
+  background-color: #386994;
+  text-decoration: none;
+
 }
 
 .summaryExercisesCompleted {

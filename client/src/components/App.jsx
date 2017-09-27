@@ -4,7 +4,7 @@ class App extends React.Component {
     this.state = {
       currentState: 'Dashboard',
       currentWorkout: window.exampleExerciseData,
-      currentExercise: window.exampleExerciseData[0],
+      currentExercise: 0,
       workoutHistory: [],
       countdown: 3,
       time: null,
@@ -19,7 +19,7 @@ class App extends React.Component {
 
   goToCountdown() {
     this.setState({currentState: 'Countdown'});
-    this.getExercises();
+    //this.getExercises();
     this.startCountdown();
   }
 
@@ -91,7 +91,11 @@ class App extends React.Component {
     current--;
     this.setState({time: current});
     //every 60 seconds, change the exercise
-
+    if (this.state.time % 60 === 0) {
+      var next = this.state.currentExercise;
+      next++;
+      this.setState({currentExercise: next});
+    }
 
     //if timer reaches 0
     if (this.state.time === 0) {
@@ -133,7 +137,7 @@ class App extends React.Component {
       return (
         <div className = "App">
           <Header />
-          <Workout exercise={this.state.currentExercise} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} />
+          <Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} />
         </div>
       )
     } else if (this.state.currentState === 'Summary') {
