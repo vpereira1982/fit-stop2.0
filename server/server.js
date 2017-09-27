@@ -3,7 +3,7 @@ var db = require('./db').mongoose;
 var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
 var path = require('path');
-
+var exampleExerciseData = require('./exampleExerciseData.js')
 //import database info
 
 //handle all the data gathering methods
@@ -84,24 +84,18 @@ app.get('/', (req,res)=>{
   res.sendFile('index.html', { root: 'client/public'});
 });
 
-
-
-
-app.get('/', (req,res)=>{
-  res.sendFile('index.html', { root: 'client/public'});
-});
-
 app.get('/workout', (req,res)=>{
-  var returnObj = {
-    warmup: [],
-    workout: [],
-    cooldown: [],
-    counter: 0
-  }
+  // var returnObj = {
+  //   warmup: [],
+  //   workout: [],
+  //   cooldown: [],
+  //   counter: 0
+  // }
 
-  for(var i = 0; i < 3; i++) {
-    getWorkout(returnObj, res)
-  }
+  // for(var i = 0; i < 3; i++) {
+  //   getWorkout(returnObj, res)
+  // }
+  res.send(exampleExerciseData);
 });
 
 
