@@ -7,7 +7,7 @@ class App extends React.Component {
       workoutHistory: [],
       countdown: 3,
       time: null,
-      workoutLengthInMins: 1
+      workoutLengthInMins: 15
     };
     this.goToWorkout = this.goToWorkout.bind(this);
     this.goToSummary = this.goToSummary.bind(this);

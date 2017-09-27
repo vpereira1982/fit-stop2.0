@@ -7,8 +7,6 @@ body {
   background-image: url(../images/bg.png);
 }
 
-.hidden { display:none; }
-
 .App {
   width: 60%;
   margin: auto;
@@ -32,6 +30,9 @@ body {
   text-align: center;
 }
 
+.workout {
+  padding-top: 35px;
+}
 .workout img {
   max-width: 85%
 }
@@ -125,9 +126,20 @@ body {
   height: auto;
 }
 
-.workoutTitle {
+.warmupTitle, .workoutTitle, .cooldownTitle {
+  color: gray;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 15px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-right: 10px;
 
+}
 
+.activeTitle {
+  color: black;
+  background-color: rgba(211, 211, 211, .6);
 }
 
 .exerciseName {
@@ -145,7 +157,7 @@ body {
   border-radius: 15px;
   padding: 45px 20px;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 2px;
 }
 
 .countdownCircle {
@@ -174,13 +186,12 @@ body {
 }
 
 .timer {
-  width: 25%;
-  height: 0;
+
   font-weight: bold;
   font-size: 45px;
   color: #000;
-  float: right;
   padding: 10px;
+  display: inline-block;
 }
 
 .timer:hover {
