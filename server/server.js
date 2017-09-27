@@ -68,41 +68,86 @@ console.log('server is running');
 //   })
 
 
-  // {
-  //   warmup: [
-  //   ],
-  //   workout: [
-  //   ],
-  //   cooldown: [
-  //   ]
-  // }
+//   {
+//     warmup: [
+//     ],
+//     workout: [
+//     ],
+//     cooldown: [
+//     ]
+//   }
+// 
 // }
 
 
 
-app.get('/', (req,res)=>{
-  res.sendFile('index.html', { root: 'client/public'});
-});
 
 
-
-
-app.get('/', (req,res)=>{
-  res.sendFile('index.html', { root: 'client/public'});
-});
-
-app.get('/workout', (req,res)=>{
+function getWorkouts(req,res){
   var returnObj = {
     warmup: [],
     workout: [],
-    cooldown: [],
-    counter: 0
+    cooldown: []
   }
 
-  for(var i = 0; i < 3; i++) {
-    getWorkout(returnObj, res)
-  }
+  Exercise.find({type: 'workout'}, function(err,data){
+    if(err) {
+      console.log('err happened with cooldown retrieval: ' + err);
+    } else{
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+
+      Exercise.find({type: 'warmup'}, function(err,data){
+        if(err) {
+          console.log('err happened with cooldown retrieval: ' + err);
+        } else{
+          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+    
+          Exercise.find({type: 'cooldown'}, function(err,data){
+            if(err) {
+              console.log('err happened with cooldown retrieval: ' + err);
+            } else{
+              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              
+              console.log('exercise data sent succesfully');
+              res.status('200').send(returnObj);
+            }
+          })
+        }
+      })
+    }
+  })
+
+}
+
+
+
+
+
+
+app.get('/', (req,res)=>{
+  res.sendFile('index.html', { root: 'client/public'});
 });
+
+
+
+
+app.get('/', (req,res)=>{
+  res.sendFile('index.html', { root: 'client/public'});
+});
+
+app.get('/workout', getWorkouts);
 
 
 
