@@ -15,6 +15,7 @@ app.listen(3000);
 app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
+app.use('/jquery', express.static('node_modules/jquery/dist'));
 
 
 app.use('/jquery', express.static('node_modules/jquery/dist'));
@@ -23,7 +24,13 @@ console.log('server is running');
 
 // define api routes here
 
-//get workout
+function getWorkouts(req,res){
+  var returnObj = {
+    warmup: [],
+    workout: [],
+    cooldown: []
+  }
+
 
 // function getWorkout(obj, res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
 //   Exercise.findOne({type: 'warmup'},function(err,data){
@@ -72,32 +79,47 @@ function getWorkout(req,res){ // this disgusting, callback infected function gra
   var workoutData = {};
 
   Exercise.findOne({type: 'warmup'},function(err,data){
-    if(err) {
-      console.log(err)
-    } else {
-      workoutData.warmup = data;
-      Exercise.findOne({type: 'workout'},function(err,data){
-        if(err) {
-          console.log(err)
-        } else {
-          workoutData.workout = data;
-          Exercise.findOne({type: 'cooldown'},function(err,data){
-            if(err) {
-              console.log(err)
-            } else {
-              workoutData.cooldown = data;
-              if( workoutData.warmup && workoutData.workout && workoutData.cooldown) {
-                    res.send(200, workoutData)
 
-                  } else {
-                    res.send(200, workoutData)
-                  }
+  Exercise.find({type: 'workout'}, function(err,data){
+
+    if(err) {
+      console.log('err happened with cooldown retrieval: ' + err);
+    } else{
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
+
+      Exercise.find({type: 'warmup'}, function(err,data){
+        if(err) {
+          console.log('err happened with cooldown retrieval: ' + err);
+        } else{
+          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+    
+          Exercise.find({type: 'cooldown'}, function(err,data){
+            if(err) {
+              console.log('err happened with cooldown retrieval: ' + err);
+            } else{
+              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              
+              console.log('exercise data sent succesfully');
+              res.status('200').send(returnObj);
             }
           })
         }
       })
     }
   })
+
 
 
   // {
@@ -113,13 +135,21 @@ function getWorkout(req,res){ // this disgusting, callback infected function gra
 
 
 
+
+
 }
+
+
+
+
+
 
 
 
 app.get('/', (req,res)=>{
   res.sendFile('index.html', { root: 'client/public'});
 });
+
 
 app.get('/workout', (req,res)=>{
   var returnObj = {
@@ -140,4 +170,27 @@ app.get('/workout', (req,res)=>{
 app.get('/workout', getWorkout);
 
 app.get('/history',()=>{})
+
+
+
+app.get('/', (req,res)=>{
+  res.sendFile('index.html', { root: 'client/public'});
+});
+
+app.get('/workout', getWorkouts);
+
+
+
+app.get('/history',(req,res)=>{
+  var name = 'harshsikka' // add req.body.username
+  User.findOne({username: name}, function(err, data){
+    if(err) {
+      console.log('err happened with cooldown retrieval: ' + err);
+    } else{
+      console.log(data.workoutHistory);
+      res.send(data.workoutHistory);
+    }
+  })
+})
+
 app.post('/addworkout',()=>{})

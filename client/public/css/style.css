@@ -30,13 +30,17 @@ body {
   text-align: center;
 }
 
-
 .workout {
   padding-top: 35px;
+
 }
 
 .workout img {
   max-width: 85%
+}
+
+.summary {
+  padding-bottom: 60px;
 }
 
 .history {
@@ -162,7 +166,6 @@ body {
   margin-bottom: 20px;
   margin-top: 10px;
 
-}
 
 .countdownCircle {
   background-image: url(../images/pizzagif.gif);
@@ -174,13 +177,12 @@ body {
   overflow: hidden;
   box-shadow: 0 0 35px gray;
   margin: auto;
-  margin-bottom: 20px;
-  position: relative;
 
 }
 
 .countdownNumber {
 
+  font-size: 2.5em;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -205,8 +207,24 @@ body {
   font-weight: bold;
   font-size: 45px;
   color: #3b8fb5;
+  padding-bottom: 15px;
+  display: inline-block;
 }
 
+.summaryStats {
+  background-color: rgba(211, 211, 211, .6);
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  margin-bottom: 5px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.congratulations:hover {
+  background-image: url(../images/pizzagif.gif);
+}
 
 .congratulations:hover {
   background-image: url(../images/pizzagif.gif);
@@ -222,6 +240,13 @@ body {
   font-weight: bold;
   font-size: 30px;
   color: #000;
+}
+
+.summaryQuote {
+  font-style: italic;
+  font-size: 35px;
+  display: inline-block;
+  padding: 15px;
 }
 
 .summaryExercisesCompleted {
