@@ -16,12 +16,57 @@ app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
 
+
+app.use('/jquery', express.static('node_modules/jquery/dist'));
 console.log('server is running');
 
 
 // define api routes here
 
 //get workout
+
+// function getWorkout(obj, res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
+//   Exercise.findOne({type: 'warmup'},function(err,data){
+//     if(err) {
+//       console.log(err)
+//     } else {
+//       obj.warmup.push(data);
+//       Exercise.findOne({type: 'cooldown'},function(err,data){
+//         if(err) {
+//           console.log(err)
+//         } else {
+//           obj.cooldown.push(data);
+//           Exercise.findOne({type: 'workout'},function(err,data){
+//             if(err) {
+//               console.log(err)
+//             } else {
+//               obj.workout.push(data);
+//               Exercise.findOne({type: 'workout'},function(err,data){
+//                 if(err) {
+//                   console.log(err)
+//                 } else {
+//                   obj.workout.push(data);
+//                   Exercise.findOne({type: 'workout'},function(err,data){
+//                     if(err) {
+//                       console.log(err)
+//                     } else {
+//                       obj.workout.push(data);
+//                       obj.counter++
+//                       console.log(obj);
+//                       if(obj.counter === 3) {
+//                         res.send(obj);
+//                       }
+//                     }
+//                   });
+//                 };
+//               })
+//             }
+//           })
+//         }
+//       })
+//     }
+//   })
+
 
 function getWorkout(req,res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
   var workoutData = {};
@@ -54,6 +99,7 @@ function getWorkout(req,res){ // this disgusting, callback infected function gra
     }
   })
 
+
   // {
   //   warmup: [
   //   ],
@@ -63,12 +109,35 @@ function getWorkout(req,res){ // this disgusting, callback infected function gra
   //   ]
   // }
 
+// }
+
+
+
 }
+
+
 
 app.get('/', (req,res)=>{
   res.sendFile('index.html', { root: 'client/public'});
 });
 
+app.get('/workout', (req,res)=>{
+  var returnObj = {
+    warmup: [],
+    workout: [],
+    cooldown: [],
+    counter: 0
+  }
+
+  for(var i = 0; i < 3; i++) {
+    getWorkout(returnObj, res)
+  }
+});
+
+
+
+
 app.get('/workout', getWorkout);
+
 app.get('/history',()=>{})
 app.post('/addworkout',()=>{})
