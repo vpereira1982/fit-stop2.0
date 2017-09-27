@@ -8,6 +8,7 @@ class App extends React.Component {
       countdown: 3,
       time: null,
       workoutLengthInMins: 15
+
     };
     this.goToWorkout = this.goToWorkout.bind(this);
     this.goToSummary = this.goToSummary.bind(this);
@@ -21,12 +22,15 @@ class App extends React.Component {
   }
 
   goToWorkout() {
+
     this.getExercises();
+
     this.setState({currentState: 'Workout'});
     //and start the workout timer
     this.startTimer();
   };
 
+<<<<<<< HEAD
   getExercises() {
     var settings = {
       method: 'GET',
@@ -42,6 +46,8 @@ class App extends React.Component {
     $.ajax(settings);
   };
 
+=======
+>>>>>>> e9def0105ae8f94d3820dd950af33c362be6a2ec
   goToSummary() {
     this.setState({currentState: 'Summary'});
   };
