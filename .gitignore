@@ -4,5 +4,10 @@
 
 
 /server/dbInfo.js
+/server/seedDb.js
 
-/client/compiled
+/client/compiled/
+
+/.flooignore
+
+/.floo

@@ -7,7 +7,7 @@ class App extends React.Component {
       workoutHistory: [],
       countdown: 3,
       time: null,
-      workoutLengthInMins: 1
+      workoutLengthInMins: 15
     };
     this.goToWorkout = this.goToWorkout.bind(this);
     this.goToSummary = this.goToSummary.bind(this);
@@ -21,9 +21,25 @@ class App extends React.Component {
   }
 
   goToWorkout() {
+    this.getExercises();
     this.setState({currentState: 'Workout'});
     //and start the workout timer
     this.startTimer();
+  };
+
+  getExercises() {
+    var settings = {
+      method: 'GET',
+      url: '/workout',
+      dataType: 'json',
+      complete: function(data) {
+        console.log('exercise data:', data);
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    }
+    $.ajax(settings);
   };
 
   goToSummary() {
