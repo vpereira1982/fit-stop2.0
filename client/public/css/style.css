@@ -31,7 +31,7 @@ body {
 }
 
 .workout {
-  padding-top: 35px;
+  padding-top: 40px;
 }
 
 .workout img {
@@ -203,6 +203,10 @@ body {
   font-weight: bold;
   font-size: 45px;
   color: #3b8fb5;
+}
+
+.congratulations:hover {
+  background-image: url(../images/pizzagif.gif);
 }
 
 .summaryTime {
