@@ -1,0 +1,13 @@
+/node_modules
+
+.DS_Store
+
+
+/server/dbInfo.js
+/server/seedDb.js
+
+/client/compiled/
+
+/.flooignore
+
+/.floo
