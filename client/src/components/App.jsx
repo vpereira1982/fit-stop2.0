@@ -16,6 +16,11 @@ class App extends React.Component {
     this.goToCountdown = this.goToCountdown.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
     this.goToSignUp = this.goToSignUp.bind(this);
+    this.getWorkoutHistory = this.getWorkoutHistory.bind(this);
+  }
+
+  componentDidMount() {
+    this.getWorkoutHistory();
   }
 
   goToCountdown() {
@@ -30,13 +35,30 @@ class App extends React.Component {
     this.startTimer();
   };
 
+  getWorkoutHistory() {
+  var settings = {
+    method: 'GET',
+    url: '/history',
+    dataType: 'json',
+    complete: (data) => {
+      console.log('workout history data', data);
+      this.setState({workoutHistory: JSON.parse(data.responseText)})
+    },
+    error: function(err) {
+      console.error(err);
+    }
+  }
+  $.ajax(settings);
+  };
+
   getExercises() {
     var settings = {
       method: 'GET',
       url: '/workout',
       dataType: 'json',
-      complete: function(data) {
+      complete: (data) => {
         console.log('exercise data:', data);
+        this.setState({currentExercises: JSON.parse(data.responseText)})
       },
       error: function(err) {
         console.error(err);
