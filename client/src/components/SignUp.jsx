@@ -1,5 +1,5 @@
 var SignUp = (props) => (
-  <div className="signup">
+  <div className="signupPage">
   SignUp
   </div>
 );
