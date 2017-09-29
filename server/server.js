@@ -16,63 +16,19 @@ app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 
-
-app.use('/jquery', express.static('node_modules/jquery/dist'));
 console.log('server is running');
 
 
 // define api routes here
 
-// function getWorkout(obj, res){ // this disgusting, callback infected function grabs random workout data and sends it to the front for us
-//   Exercise.findOne({type: 'warmup'},function(err,data){
-//     if(err) {
-//       console.log(err)
-//     } else {
-//       obj.warmup.push(data);
-//       Exercise.findOne({type: 'cooldown'},function(err,data){
-//         if(err) {
-//           console.log(err)
-//         } else {
-//           obj.cooldown.push(data);
-//           Exercise.findOne({type: 'workout'},function(err,data){
-//             if(err) {
-//               console.log(err)
-//             } else {
-//               obj.workout.push(data);
-//               Exercise.findOne({type: 'workout'},function(err,data){
-//                 if(err) {
-//                   console.log(err)
-//                 } else {
-//                   obj.workout.push(data);
-//                   Exercise.findOne({type: 'workout'},function(err,data){
-//                     if(err) {
-//                       console.log(err)
-//                     } else {
-//                       obj.workout.push(data);
-//                       obj.counter++
-//                       console.log(obj);
-//                       if(obj.counter === 3) {
-//                         res.send(obj);
-//                       }
-//                     }
-//                   });
-//                 };
-//               })
-//             }
-//           })
-//         }
-//       })
-//     }
-//   })
-
-
-function getWorkout(req,res) { // this disgusting, callback infected function grabs random workout data and sends it to the front for us
-  var workoutData = {};
-
-  Exercise.findOne({type: 'warmup'},function(err,data){
+function getWorkouts(req,res){
+  var returnObj = {
+    warmup: [],
+    workout: [],
+    cooldown: []
+  }
 
   Exercise.find({type: 'workout'}, function(err,data){
-
     if(err) {
       console.log('err happened with cooldown retrieval: ' + err);
     } else{
@@ -105,22 +61,21 @@ function getWorkout(req,res) { // this disgusting, callback infected function gr
               console.log('exercise data sent succesfully');
               res.status('200').send(returnObj);
             }
-          }) //exercise.find
-        } //else
-      }) // exercise.find
-    } //else
-  }) //find
+          })
+        }
+      })
+    }
+  })
 
-  }) //find one
-} //function get workout
+}
+
 
 
 app.get('/', (req,res)=>{
   res.sendFile('index.html', { root: 'client/public'});
 });
 
-
-app.get('/workout', getWorkout);
+app.get('/workout', getWorkouts);
 
 app.get('/history',(req,res)=>{
   var name = 'harshsikka' // add req.body.username
@@ -134,5 +89,32 @@ app.get('/history',(req,res)=>{
   })
 })
 
-app.post('/addworkout',()=>{});
+function addWorkout(req,res){
 
+  var name = 'harshsikka' // add req.body.username
+  var workout = { // add req.body.workout
+    yay: 'I worked out'
+  }
+  User.findOne({username: name}, function(err, user){
+    console.log(user);
+    if(err) {
+      console.log('err happened with cooldown retrieval: ' + err);
+    } else{
+      user.workoutHistory.unshift(workout);
+      console.log(user.workoutHistory)
+
+      user.save(function(err){
+        if(err) {
+          console.log(err + ' error happened!');
+        } else {
+          console.log('user workouts updated');
+        }
+      })
+
+    }
+  })
+}
+
+addWorkout()
+
+app.post('/addworkout', addWorkout)
