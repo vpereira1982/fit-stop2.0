@@ -22,41 +22,41 @@ console.log('server is running');
 // define api routes here
 
 function getWorkouts(req,res){
-  var returnObj = {
-    warmup: [],
-    workout: [],
-    cooldown: []
-  }
+  var returnObj = []
 
-  Exercise.find({type: 'workout'}, function(err,data){
+
+  Exercise.find({type: 'warmup'}, function(err,data){
     if(err) {
       console.log('err happened with cooldown retrieval: ' + err);
     } else{
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
-      returnObj.workout.push(data[Math.floor(Math.random()*data.length)]);
 
-      Exercise.find({type: 'warmup'}, function(err,data){
+      returnObj.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.push(data[Math.floor(Math.random()*data.length)]);
+      returnObj.push(data[Math.floor(Math.random()*data.length)]);
+
+
+      Exercise.find({type: 'workout'}, function(err,data){
         if(err) {
           console.log('err happened with cooldown retrieval: ' + err);
         } else{
-          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
-          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
-          returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
+
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
+          returnObj.push(data[Math.floor(Math.random()*data.length)]);
 
           Exercise.find({type: 'cooldown'}, function(err,data){
             if(err) {
               console.log('err happened with cooldown retrieval: ' + err);
             } else{
-              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
-              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
-              returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.push(data[Math.floor(Math.random()*data.length)]);
+              returnObj.push(data[Math.floor(Math.random()*data.length)]);
 
               console.log('exercise data sent succesfully');
               res.status('200').send(returnObj);
@@ -88,8 +88,10 @@ app.get('/history',(req,res)=>{
   })
 })
 
-function addWorkout(req,res){
 
+// add a created at tolken for this based on when the request hits
+function addWorkout(req,res){
+  console.log('receiving data:', req.body);
   var name = 'harshsikka' // add req.body.username
   var workout = { // add req.body.workout
     yay: 'I worked out'
@@ -107,6 +109,7 @@ function addWorkout(req,res){
           console.log(err + ' error happened!');
         } else {
           console.log('user workouts updated');
+          res.status(202).send('user workout history updated');
         }
       })
 
@@ -114,6 +117,9 @@ function addWorkout(req,res){
   })
 }
 
-addWorkout()
+// need to add user creation
+// need to add user verification
 
-app.post('/addworkout', addWorkout)
+
+
+app.post('/addworkout', addWorkout);

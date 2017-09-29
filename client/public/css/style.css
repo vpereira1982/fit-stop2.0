@@ -215,7 +215,9 @@ body {
   margin-top: 5px;
   margin-bottom: 10px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;
 }
 
 .summaryCongrats {
