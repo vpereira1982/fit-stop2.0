@@ -34,6 +34,7 @@ class Workout extends React.Component {
 	  <span className={'cooldownTitle ' + (this.state.cooldownActive ? 'activeTitle' : null)}>Cooldown</span>
 	  <Timer timer= {this.props.timer} />
 
+
 	  <Exercise exercise= {this.props.exercise} />
 
 	  <button onClick={this.props.goToDashboard} className="blackButton">Quit & Go Back To Dashboard</button>
@@ -42,6 +43,7 @@ class Workout extends React.Component {
   	)
   }
 };
+
 
 
 window.Workout = Workout;

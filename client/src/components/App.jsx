@@ -10,6 +10,7 @@ class App extends React.Component {
       countdown: 3,
       time: null,
       workoutLengthInMins: 15
+
     };
     this.goToWorkout = this.goToWorkout.bind(this);
     this.goToSummary = this.goToSummary.bind(this);
@@ -216,6 +217,7 @@ class App extends React.Component {
         <div className = "App">
           <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
           <Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />
+
         </div>
       )
     } else if (this.state.currentState === 'Summary') {
