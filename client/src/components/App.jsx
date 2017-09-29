@@ -14,6 +14,8 @@ class App extends React.Component {
     this.goToSummary = this.goToSummary.bind(this);
     this.goToDashboard = this.goToDashboard.bind(this);
     this.goToCountdown = this.goToCountdown.bind(this);
+    this.goToLogin = this.goToLogin.bind(this);
+    this.goToSignUp = this.goToSignUp.bind(this);
   }
 
   goToCountdown() {
@@ -49,6 +51,14 @@ class App extends React.Component {
 
   goToDashboard() {
     this.setState({currentState: 'Dashboard'});
+  };
+
+  goToLogin() {
+    this.setState({currentState: 'Login'})
+  };
+
+  goToSignUp() {
+    this.setState({currentState: 'SignUp'})
   };
 
   startCountdown() {
@@ -114,28 +124,42 @@ class App extends React.Component {
     if(this.state.currentState === 'Dashboard') {
       return (
         <div className = "App">
-          <Header />
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
           <Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.workoutHistory} />
         </div>
       )
-    } else if (this.state.currentState === 'Countdown') {
+    } else if (this.state.currentState === 'Login') {
       return (
         <div className = "App">
-          <Header />
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
+          <Login />
+        </div>
+      )
+    }else if (this.state.currentState === 'SignUp') {
+      return (
+        <div className = "App">
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
+          <SignUp />
+        </div>
+      )
+    }else if (this.state.currentState === 'Countdown') {
+      return (
+        <div className = "App">
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
           <Countdown countdown={this.state.countdown} />
         </div>
       )
     } else if (this.state.currentState === 'Workout') {
       return (
         <div className = "App">
-          <Header />
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
           <Workout currentExercises={this.state.currentExercises} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} />
         </div>
       )
     } else if (this.state.currentState === 'Summary') {
       return (
         <div className = "App">
-            <Header />
+            <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
             <Summary goToDashboard={this.goToDashboard} />
         </div>
       )
