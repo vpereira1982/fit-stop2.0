@@ -70,7 +70,6 @@ function getWorkouts(req,res){
 }
 
 
-
 app.get('/', (req,res)=>{
   res.sendFile('index.html', { root: 'client/public'});
 });
