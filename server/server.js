@@ -3,7 +3,6 @@ var db = require('./db').mongoose;
 var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
 var path = require('path');
-
 //import database info
 
 //handle all the data gathering methods
@@ -50,7 +49,7 @@ function getWorkouts(req,res){
           returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
           returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
           returnObj.warmup.push(data[Math.floor(Math.random()*data.length)]);
-    
+
           Exercise.find({type: 'cooldown'}, function(err,data){
             if(err) {
               console.log('err happened with cooldown retrieval: ' + err);
@@ -58,7 +57,7 @@ function getWorkouts(req,res){
               returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
               returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
               returnObj.cooldown.push(data[Math.floor(Math.random()*data.length)]);
-              
+
               console.log('exercise data sent succesfully');
               res.status('200').send(returnObj);
             }
@@ -71,24 +70,11 @@ function getWorkouts(req,res){
 }
 
 
-
-
-
-
-app.get('/', (req,res)=>{
-  res.sendFile('index.html', { root: 'client/public'});
-});
-
-
-
-
 app.get('/', (req,res)=>{
   res.sendFile('index.html', { root: 'client/public'});
 });
 
 app.get('/workout', getWorkouts);
-
-
 
 app.get('/history',(req,res)=>{
   var name = 'harshsikka' // add req.body.username
@@ -102,9 +88,8 @@ app.get('/history',(req,res)=>{
   })
 })
 
-
 function addWorkout(req,res){
-  
+
   var name = 'harshsikka' // add req.body.username
   var workout = { // add req.body.workout
     yay: 'I worked out'
@@ -124,7 +109,7 @@ function addWorkout(req,res){
           console.log('user workouts updated');
         }
       })
-      
+
     }
   })
 }
