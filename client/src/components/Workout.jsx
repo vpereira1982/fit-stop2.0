@@ -9,7 +9,8 @@ var Workout = (props) => (
 
 
   <Exercise exercise= {props.exercise} />
-  <button onClick={props.goToSummary} className="blackButton">Summary</button>
+  <button onClick={props.goToDashboard} className="blackButton">Quit & Go Back To Dashboard</button>
+  <a onClick={props.goToSummary} href="#">Summary</a>
   </div>
 );
 
