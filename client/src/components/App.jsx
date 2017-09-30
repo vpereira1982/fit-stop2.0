@@ -26,15 +26,8 @@ class App extends React.Component {
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
-    // this.showButtons = this.showButtons.bind(this);
-    // this.hideButtons = this.hideButtons.bind(this);
-  }
 
-  // componentDidMount() {
-  //   // if(this.state.loggedIn) {
-  //   //   this.getWorkoutHistory();
-  //   // }
-  // }
+  }
 
   goToDashboard() {
     this.setState({showButtons: true});
@@ -166,7 +159,7 @@ class App extends React.Component {
 
   goToCountdown() {
     this.setState({currentState: 'Countdown'});
-   // this.getExercises();
+   // this.getExercises(); //uncomment to fetch from db
     this.setState({currentExercise: 0});
     this.startCountdown();
     this.setState({showButtons: false});
@@ -250,14 +243,6 @@ class App extends React.Component {
     }
   }
 
-  // hideButtons() {
-  //   this.setState({hideButton: true})
-  // }
-
-  // showButtons() {
-  // this.setState({hideButton: false})
-  // }
-
   goToSummary() {
     this.setState({showButtons: true});
     //cancel interval
@@ -270,7 +255,6 @@ class App extends React.Component {
       this.sendWorkoutDataToServer();
     }
   };
-
 
   formatTime(seconds) {
     var mm = Math.floor(seconds / 60);
@@ -307,7 +291,7 @@ class App extends React.Component {
 
     return (
       <div className = "App">
-        <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons}/>
+        <Header username={this.state.username} goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons}/>
         {toBeRendered()}
       </div>
     )
