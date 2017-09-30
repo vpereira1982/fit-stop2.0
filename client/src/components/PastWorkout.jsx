@@ -1,8 +1,9 @@
 var PastWorkout = (props) => (
   <div className="pastWorkout">
-    <p> <span className="dateAndTime">Date</span> | <span className="dateAndTime">Time</span> | Exercise1, Exercise2, Exercise3 </p>
+    <p> <span className="dateAndTime">{props.date}</span> | <span>{props.lengthOfWorkout} minutes</span> </p>
   </div>
 );
 
 
 window.PastWorkout = PastWorkout;
+
