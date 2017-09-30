@@ -35,6 +35,7 @@
 ### Roadmap
 
 > npm start (initial compilation and server start)
+
 > npm run watch (recompile on change)
 
 > client/public/: css, images, and index.html
