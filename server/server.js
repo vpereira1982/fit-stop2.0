@@ -162,16 +162,20 @@ app.post('/login', function(req, res) {
   User.findOne({
     username:name
   }, function(err, data) {
-    console.log(data)
     if (!err) {
-      if (bcrypt.compareSync(name, data.password)=== true) {
-        req.session.regenerate(function () {
-          req.session.user = name;
-          res.status(200).send('Log in success');
-        })
+      if(data){
+        if (bcrypt.compareSync(pass, data.password)=== true) {
+          req.session.regenerate(function () {
+            req.session.user = name;
+            res.status(200).send('Log in success');
+          })
+        }else {
+          res.status(400).send('Log in attempt failed');
+        }
       }else {
         res.status(400).send('Log in attempt failed');
       }
+
     }else {
       console.log("Database access error" + err);
       res.redirect('/login');
@@ -206,7 +210,7 @@ app.post('/signup', function(req, res) {
           }
         })
       } else {
-        console.log("User exsists");
+        res.status(400).send('User exsists');
       }
     } else {
       console.log("Database access error" + err);
