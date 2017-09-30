@@ -35,6 +35,9 @@ class App extends React.Component {
   goToDashboard() {
     this.getWorkoutHistory();
     this.setState({currentState: 'Dashboard'});
+    if (this.state.interval) {
+      clearInterval(this.state.interval);
+    }
   }
 
   getWorkoutHistory() {
