@@ -7,6 +7,7 @@ class App extends React.Component {
       currentExercise: 0,
       workoutDate: null,
       workoutHistory: [{date: 'Test1', lengthOfWorkout: 15, _id: 1}, {date: 'Test2', lengthOfWorkout: 20, _id: 2}],
+      username: 'harshsikka',
       countdown: 3,
       time: null,
       workoutLengthInMins: 15
@@ -22,11 +23,12 @@ class App extends React.Component {
     this.sendWorkoutDataToServer = this.sendWorkoutDataToServer.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.getWorkoutHistory();
-  // }
+  componentDidMount() {
+    this.getWorkoutHistory();
+  }
 
   goToDashboard() {
+    this.getWorkoutHistory();
     this.setState({currentState: 'Dashboard'});
   };
 
@@ -35,9 +37,15 @@ class App extends React.Component {
       method: 'GET',
       url: '/history',
       dataType: 'json',
+      data: {
+        username: this.state.username,
+
+      },
       complete: (data) => {
         console.log('workout history data', data);
-        this.setState({workoutHistory: JSON.parse(data.responseText)})
+        var firstFive = JSON.parse(data.responseText).slice(0, 5);
+        console.log('first five',  firstFive)
+        this.setState({workoutHistory: firstFive})
       },
       error: function(err) {
         console.error(err);
@@ -115,7 +123,7 @@ class App extends React.Component {
     var interval = setInterval(this.timer.bind(this), 1000);
     this.setState({interval: interval});
   }
-  
+
   //calls function on Workout component using ref
   triggerActiveTitleChange() {
     this.refs.workoutPage.highlightActiveTitle();
@@ -131,7 +139,7 @@ class App extends React.Component {
       var next = this.state.currentExercise;
       next++;
       this.setState({currentExercise: next});
-      this.triggerActiveTitleChange(); 
+      this.triggerActiveTitleChange();
     }
 
     //if timer reaches 0
@@ -145,31 +153,29 @@ class App extends React.Component {
     //cancel interval
     clearInterval(this.state.interval);
     this.setState({currentState: 'Summary'});
+    var currentDate = Date();
+    this.setState({workoutDate: currentDate});
+    console.log('workout date', this.state.workoutDate);
     this.sendWorkoutDataToServer();
-    this.setState({workoutDate: Date()});
   };
 
-
   sendWorkoutDataToServer() {
-    console.log('send data');
-      var settings = {
-      method: 'POST',
-      url: '/addworkout',
-      dataType: 'json',
-      data: {
-        date: this.state.workoutDate,
-        workout: this.state.currentWorkout,
+    $.ajax({
+      type: "POST",
+      url: 'http://localhost:3000/addWorkout',
+      data: JSON.stringify({
+        username: this.state.username,
+        date: Date(),
+        currentWorkout: this.state.currentWorkout,
         lengthOfWorkout: this.state.workoutLengthInMins
+      }),
+      contentType: 'application/json',
+      dataType: 'json',
+      success: function (data) {
+        console.log('succesfully posted data!');
       },
-      complete: (data) => {
-        console.log('add workout data to db:', data);
-      },
-      error: function(err) {
-        console.error(err);
-      }
-    }
-    $.ajax(settings);
-  }
+    })
+  };
 
   formatTime(seconds) {
     var mm = Math.floor(seconds / 60);
