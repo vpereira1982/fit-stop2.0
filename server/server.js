@@ -4,6 +4,7 @@ var db = require('./db').mongoose;
 var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
 var path = require('path');
+
 var session = require('express-session');
 
 //import database info
@@ -18,6 +19,7 @@ app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -35,6 +37,7 @@ var checkUser = function(req, res, next) {
     res.sendFile('login.html', { root: 'client/public'});
   }
 };
+
 console.log('server is running');
 
 
@@ -164,5 +167,6 @@ app.post('/login', function(req, res) {
       res.status(400).send('not logged in');
     }
 });
+
 
 

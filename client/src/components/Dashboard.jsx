@@ -6,7 +6,7 @@ var Dashboard = (props) => (
 	  </div>
 
 	  <History workoutHistory={props.workoutHistory} workoutDate={props.workoutDate} workoutLength={props.workoutLength} loggedIn={props.loggedIn}/>
-  </div>
+	</div>
 );
 
 

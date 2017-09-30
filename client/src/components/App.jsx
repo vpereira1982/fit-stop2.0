@@ -52,8 +52,7 @@ class App extends React.Component {
         console.log('workout history data', data);
         var firstFive = JSON.parse(data.responseText).slice(0, 5);
         console.log('first five',  firstFive)
-        this.setState({workoutHistory: firstFive});
-
+        this.setState({workoutHistory: firstFive})
       },
       error: function(err) {
         console.error(err);
@@ -105,6 +104,11 @@ class App extends React.Component {
   logOut() {
     this.setState({loggedIn: false});
     this.setState({username: null});
+    this.goToDashboard();
+  }
+
+  logOut() {
+    this.setState({loggedIn: false});
     this.goToDashboard();
   }
 
@@ -204,7 +208,7 @@ class App extends React.Component {
     if (this.state.loggedIn) {
       this.sendWorkoutDataToServer();
     }
-  }
+  };
 
   sendWorkoutDataToServer() {
     $.ajax({
@@ -222,7 +226,7 @@ class App extends React.Component {
         console.log('succesfully posted data!');
       },
     })
-  }
+  };
 
   formatTime(seconds) {
     var mm = Math.floor(seconds / 60);
