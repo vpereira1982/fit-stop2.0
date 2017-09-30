@@ -6,7 +6,7 @@ var Dashboard = (props) => (
 		    <img onClick= {props.goToCountdown} src="public/images/pizzablue.png" alt="Start"/>
 
 		  </div>
-	  <History workoutHistory={props.workoutHistory} workoutDate={props.workoutDate} workoutLength={props.workoutLength}/>
+	  <History workoutHistory={props.workoutHistory} workoutDate={props.workoutDate} workoutLength={props.workoutLength} loggedIn={props.loggedIn}/>
 	</div>
 );
 

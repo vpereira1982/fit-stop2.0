@@ -6,8 +6,9 @@ class App extends React.Component {
       currentWorkout: window.exampleExerciseData,
       currentExercise: 0,
       workoutDate: null,
-      workoutHistory: [{date: 'Test1', lengthOfWorkout: 15, _id: 1}, {date: 'Test2', lengthOfWorkout: 20, _id: 2}],
-      username: 'harshsikka',
+      workoutHistory: [],
+      username: 'harshsikka', //hardcoded for testing, needs to be changed
+      loggedIn: true, //should be false and change to true when user is logged in; false removes history view, and button reads Log In
       countdown: 3,
       time: null,
       workoutLengthInMins: 15
@@ -21,10 +22,13 @@ class App extends React.Component {
     this.goToSignUp = this.goToSignUp.bind(this);
     this.getWorkoutHistory = this.getWorkoutHistory.bind(this);
     this.sendWorkoutDataToServer = this.sendWorkoutDataToServer.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount() {
-    this.getWorkoutHistory();
+    if(this.state.loggedIn) {
+      this.getWorkoutHistory();
+    }
   }
 
   goToDashboard() {
@@ -61,6 +65,11 @@ class App extends React.Component {
   goToSignUp() {
     this.setState({currentState: 'SignUp'})
   };
+
+  logOut() {
+    this.setState({loggedIn: false});
+    this.goToDashboard();
+  }
 
   goToCountdown() {
     this.setState({currentState: 'Countdown'});
@@ -156,7 +165,9 @@ class App extends React.Component {
     var currentDate = Date();
     this.setState({workoutDate: currentDate});
     console.log('workout date', this.state.workoutDate);
-    this.sendWorkoutDataToServer();
+    if (this.state.loggedIn) {
+      this.sendWorkoutDataToServer();
+    }
   };
 
   sendWorkoutDataToServer() {
@@ -193,35 +204,35 @@ class App extends React.Component {
     if(this.state.currentState === 'Dashboard') {
       return (
         <div className = "App">
-          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
-          <Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} />
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
+          <Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} loggedIn={this.state.loggedIn} />
         </div>
       )
     } else if (this.state.currentState === 'Login') {
       return (
         <div className = "App">
-          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
           <Login />
         </div>
       )
     } else if (this.state.currentState === 'SignUp') {
       return (
         <div className = "App">
-          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
           <SignUp />
         </div>
       )
     } else if (this.state.currentState === 'Countdown') {
       return (
         <div className = "App">
-          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
           <Countdown countdown={this.state.countdown} />
         </div>
       )
     } else if (this.state.currentState === 'Workout') {
       return (
         <div className = "App">
-          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
+          <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
           <Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />
 
         </div>
@@ -229,8 +240,8 @@ class App extends React.Component {
     } else if (this.state.currentState === 'Summary') {
       return (
         <div className = "App">
-            <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
-            <Summary goToDashboard={this.goToDashboard} currentWorkout={this.state.currentWorkout} workoutDate={this.state.workoutDate} workoutLengthInMins={this.state.workoutLengthInMins}/>
+            <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
+            <Summary goToDashboard={this.goToDashboard} currentWorkout={this.state.currentWorkout} workoutDate={this.state.workoutDate} workoutLengthInMins={this.state.workoutLengthInMins} loggedIn={this.state.loggedIn} />
         </div>
       )
     } else {
