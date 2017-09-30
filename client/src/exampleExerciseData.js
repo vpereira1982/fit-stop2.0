@@ -29,7 +29,7 @@ var highKnees = {
   name: 'High Knees',
   description: 'Begin jogging in place, lifting the knees as high as you can. Try to lift your knees up to hip level but keep the core tight to support your back. For a more advanced move, hold your hands straight at hip level and try to touch the knees to your hands as you lift them.Bring the knees towards your hands instead of reaching the hands to the knees!',
   type: 'warmup',
-  picture: 'public/images/pushUps.png',
+  picture: '',
   environment: 'indoor',
   muscleGroup: 'core',
   difficulty: 'easy'

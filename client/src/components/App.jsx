@@ -11,6 +11,7 @@ class App extends React.Component {
       loggedIn: false,
       countdown: 3,
       time: null,
+      showButtons: true,
       workoutLengthInMins: 15
     };
 
@@ -25,16 +26,21 @@ class App extends React.Component {
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
+    // this.showButtons = this.showButtons.bind(this);
+    // this.hideButtons = this.hideButtons.bind(this);
   }
 
-  componentDidMount() {
-    if(this.state.loggedIn) {
-      this.getWorkoutHistory();
-    }
-  }
+  // componentDidMount() {
+  //   // if(this.state.loggedIn) {
+  //   //   this.getWorkoutHistory();
+  //   // }
+  // }
 
   goToDashboard() {
-    this.getWorkoutHistory();
+    this.setState({showButtons: true});
+    if (this.state.loggedIn){
+      this.getWorkoutHistory();
+    }
     this.setState({currentState: 'Dashboard'});
     if (this.state.interval) {
       clearInterval(this.state.interval);
@@ -50,10 +56,9 @@ class App extends React.Component {
         username: this.state.username,
       },
       complete: (data) => {
-        console.log('workout history data', data);
         var firstFive = JSON.parse(data.responseText).slice(0, 5);
-        console.log('first five',  firstFive)
         this.setState({workoutHistory: firstFive})
+
       },
       error: function(err) {
         console.error(err);
@@ -83,19 +88,17 @@ class App extends React.Component {
       contentType: 'application/json',
       dataType: 'json',
       complete: data => {
-        console.log('succesfully posted data!', data);
         if (data.responseText === "Log in success") {
-          console.log(username);
-          console.log(password);
           this.setState({username: username});
           this.setState({loggedIn: true});
           this.goToDashboard();
         } else {
+          alert("Username and Password Invalid");
           this.goToLogin();
         }
       },
       error: function (err) {
-        console.log('err', err);
+        //console.log('err', err);
       }
     })
   }
@@ -122,20 +125,38 @@ class App extends React.Component {
       contentType: 'application/json',
       dataType: 'json',
       complete: data => {
-        console.log('succesfully posted data!', data);
         if (data.responseText === "User Created") {
           this.setState({username: username});
           this.setState({loggedIn: true});
           this.goToDashboard();
         } else {
+          alert("Username and Password Invalid");
           this.goToSignUp();
         }
       },
       error: function (err) {
-        console.log('err', err);
+        //console.log('err', err);
       }
     })
   }
+  sendWorkoutDataToServer() {
+    console.log('sending data');
+    $.ajax({
+      type: "POST",
+      url: '/addWorkout',
+      data: JSON.stringify({
+        username: this.state.username,
+        date: Date(),
+        currentWorkout: this.state.currentWorkout,
+        lengthOfWorkout: this.state.workoutLengthInMins
+      }),
+      contentType: 'application/json',
+      dataType: 'json',
+      success: function (data) {
+        console.log('succesfully posted data!');
+      },
+    })
+  };
 
   logOut() {
     this.setState({loggedIn: false});
@@ -145,9 +166,10 @@ class App extends React.Component {
 
   goToCountdown() {
     this.setState({currentState: 'Countdown'});
-    this.getExercises();
+   // this.getExercises();
     this.setState({currentExercise: 0});
     this.startCountdown();
+    this.setState({showButtons: false});
   }
 
   goToWorkout() {
@@ -196,7 +218,6 @@ class App extends React.Component {
   }
 
   startTimer() {
-    console.log('start timer');
     //reset timer
     var current = this.state.workoutLengthInMins * 60;
     this.setState({time: current});
@@ -229,7 +250,16 @@ class App extends React.Component {
     }
   }
 
+  // hideButtons() {
+  //   this.setState({hideButton: true})
+  // }
+
+  // showButtons() {
+  // this.setState({hideButton: false})
+  // }
+
   goToSummary() {
+    this.setState({showButtons: true});
     //cancel interval
     clearInterval(this.state.interval);
     this.setState({currentState: 'Summary'});
@@ -241,23 +271,6 @@ class App extends React.Component {
     }
   };
 
-  sendWorkoutDataToServer() {
-    $.ajax({
-      type: "POST",
-      url: 'http://localhost:3000/addWorkout',
-      data: JSON.stringify({
-        username: this.state.username,
-        date: Date(),
-        currentWorkout: this.state.currentWorkout,
-        lengthOfWorkout: this.state.workoutLengthInMins
-      }),
-      contentType: 'application/json',
-      dataType: 'json',
-      success: function (data) {
-        console.log('succesfully posted data!');
-      },
-    })
-  };
 
   formatTime(seconds) {
     var mm = Math.floor(seconds / 60);
@@ -275,16 +288,17 @@ class App extends React.Component {
         return (<Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} loggedIn={this.state.loggedIn} />);
       }
       if (this.state.currentState === 'Login') {
-          return (<Login login={this.login}/>);
+          return (<Login login={this.login} />);
       }
       if (this.state.currentState === 'SignUp') {
-          return (<SignUp signup={this.signup}/>);
+          return (<SignUp signup={this.signup}  />);
       }
       if (this.state.currentState === 'Countdown') {
           return (<Countdown countdown={this.state.countdown} />);
       }
       if (this.state.currentState === 'Workout') {
-          return (<Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />);
+
+          return (<Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage"  />);
       }
       if (this.state.currentState === 'Summary') {
           return (<Summary goToDashboard={this.goToDashboard} currentWorkout={this.state.currentWorkout} workoutDate={this.state.workoutDate} workoutLengthInMins={this.state.workoutLengthInMins} loggedIn={this.state.loggedIn} />);
@@ -293,59 +307,11 @@ class App extends React.Component {
 
     return (
       <div className = "App">
-        <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
+        <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons}/>
         {toBeRendered()}
       </div>
     )
-    // if(this.state.currentState === 'Dashboard') {
-    //   var toBeRendered = (<Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} loggedIn={this.state.loggedIn} />)
-    //   return (
-    //     <div className = "App">
-    //       <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
-    //       {toBeRendered}
-    //     </div>
-    //   )
-    // } else if (this.state.currentState === 'Login') {
-    //   return (
-    //     <div className = "App">
-    //       <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
-    //       <Login />
-    //     </div>
-    //   )
-    // } else if (this.state.currentState === 'SignUp') {
-    //   return (
-    //     <div className = "App">
-    //       <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
-    //       <SignUp />
-    //     </div>
-    //   )
-    // } else if (this.state.currentState === 'Countdown') {
-    //   return (
-    //     <div className = "App">
-    //       <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
-    //       <Countdown countdown={this.state.countdown} />
-    //     </div>
-    //   )
-    // } else if (this.state.currentState === 'Workout') {
-    //   return (
-    //     <div className = "App">
-    //       <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
-    //       <Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />
 
-    //     </div>
-    //   )
-    // } else if (this.state.currentState === 'Summary') {
-    //   return (
-    //     <div className = "App">
-    //         <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} />
-    //         <Summary goToDashboard={this.goToDashboard} currentWorkout={this.state.currentWorkout} workoutDate={this.state.workoutDate} workoutLengthInMins={this.state.workoutLengthInMins} loggedIn={this.state.loggedIn} />
-    //     </div>
-    //   )
-    // } else {
-    //   return (
-    //     <p>Error... sad face...</p>
-    //   )
-    // }
   } //render
 } //class
 

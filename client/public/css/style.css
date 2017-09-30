@@ -284,5 +284,45 @@ body {
   color: #000;
 }
 
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 150px;
+    text-align: right;
+    padding: 5px;
+    margin: 10px 5px;
+}
+
+input[id=username], input[id=password] {
+  display: inline-block;
+  float: left;
+  padding: 5px;
+  margin: 10px 5px;
+  width: 60%;
+}
+
+input[id=username]:focus, input[id=password]:focus {
+    border: 2px solid #3b8fb5;
+}
+
+.hideButton {
+  display: none;
+}
+
+input[type=submit] {
+  background-color: #000000;
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 50px;
+  vertical-align: middle;
+  display: block;
+  margin-bottom: 20px;
+}
+
 
 
