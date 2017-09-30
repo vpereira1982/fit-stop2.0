@@ -24,6 +24,7 @@ class App extends React.Component {
     this.sendWorkoutDataToServer = this.sendWorkoutDataToServer.bind(this);
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
   }
 
   componentDidMount() {
@@ -83,7 +84,9 @@ class App extends React.Component {
       dataType: 'json',
       complete: data => {
         console.log('succesfully posted data!', data);
-        if (data.responseText === "logged in") {
+        if (data.responseText === "Log in success") {
+          console.log(username);
+          console.log(password);
           this.setState({username: username});
           this.setState({loggedIn: true});
           this.goToDashboard();
@@ -101,14 +104,42 @@ class App extends React.Component {
     this.setState({currentState: 'SignUp'})
   }
 
-  logOut() {
-    this.setState({loggedIn: false});
-    this.setState({username: null});
-    this.goToDashboard();
+  signup(event) {
+    event.preventDefault();
+
+    const data = new FormData(event.target);
+    var username = data.get('username');
+    var password = data.get('password');
+
+
+    $.ajax({
+      type: "POST",
+      url: '/signup',
+      data: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      contentType: 'application/json',
+      dataType: 'json',
+      complete: data => {
+        console.log('succesfully posted data!', data);
+        if (data.responseText === "User Created") {
+          this.setState({username: username});
+          this.setState({loggedIn: true});
+          this.goToDashboard();
+        } else {
+          this.goToSignUp();
+        }
+      },
+      error: function (err) {
+        console.log('err', err);
+      }
+    })
   }
 
   logOut() {
     this.setState({loggedIn: false});
+    this.setState({username: null});
     this.goToDashboard();
   }
 
@@ -247,7 +278,7 @@ class App extends React.Component {
           return (<Login login={this.login}/>);
       }
       if (this.state.currentState === 'SignUp') {
-          return (<SignUp />);
+          return (<SignUp signup={this.signup}/>);
       }
       if (this.state.currentState === 'Countdown') {
           return (<Countdown countdown={this.state.countdown} />);

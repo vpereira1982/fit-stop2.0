@@ -203,7 +203,7 @@ app.post('/signup', function(req, res) {
           if(!err){
             req.session.regenerate(function(){
               req.session.user = name;
-              res.redirect('/');
+              res.status(200).send('User Created');
             });
           } else {
             console.log(err);
