@@ -26,7 +26,6 @@ class Workout extends React.Component {
   }
 
    render() {
-   	{this.props.hideButtons}
     return (
     <div className="workout">
 	  <span className={'warmupTitle ' + (this.state.warmupActive ? 'activeTitle' : null)}>Warmup</span>
@@ -38,7 +37,7 @@ class Workout extends React.Component {
 	  <Exercise exercise= {this.props.exercise} />
 
 	  <button onClick={this.props.goToDashboard} className="blackButton">Quit & Back To Dashboard</button>
-	  <a onClick={this.props.goToSummary} href="#">Summary</a>
+	  <button onClick={this.props.goToSummary} className="blackButton">Summary</button>
 	</div>
   	)
   }
