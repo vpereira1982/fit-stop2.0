@@ -6,7 +6,7 @@ class App extends React.Component {
       currentWorkout: window.exampleExerciseData,
       currentExercise: 0,
       workoutDate: null,
-      workoutHistory: [],
+      workoutHistory: [{date: 'Test1', lengthOfWorkout: 15, _id: 1}, {date: 'Test2', lengthOfWorkout: 20, _id: 2}],
       countdown: 3,
       time: null,
       workoutLengthInMins: 15
@@ -22,9 +22,9 @@ class App extends React.Component {
     this.sendWorkoutDataToServer = this.sendWorkoutDataToServer.bind(this);
   }
 
-  componentDidMount() {
-    this.getWorkoutHistory();
-  }
+  // componentDidMount() {
+  //   this.getWorkoutHistory();
+  // }
 
   goToDashboard() {
     this.setState({currentState: 'Dashboard'});
@@ -149,16 +149,16 @@ class App extends React.Component {
     this.setState({workoutDate: Date()});
   };
 
-  sendWorkoutDataToServer() {
 
+  sendWorkoutDataToServer() {
     console.log('send data');
       var settings = {
       method: 'POST',
       url: '/addworkout',
       dataType: 'json',
       data: {
-        currentWorkout: this.state.currentWorkout,
         date: this.state.workoutDate,
+        workout: this.state.currentWorkout,
         lengthOfWorkout: this.state.workoutLengthInMins
       },
       complete: (data) => {
@@ -188,7 +188,7 @@ class App extends React.Component {
       return (
         <div className = "App">
           <Header goToLogin={this.goToLogin} goToSignUp={this.goToSignUp}/>
-          <Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.workoutHistory} />
+          <Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} />
         </div>
       )
     } else if (this.state.currentState === 'Login') {
