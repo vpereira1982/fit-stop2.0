@@ -1,5 +1,6 @@
 var Exercise = (props) => (
   <div className="exercise">
+  {props.hideButtons}
     <div className="exerciseDescription">
         <img className="exerciseImage" src={props.exercise.picture} />
         <p><span className="exerciseName">{props.exercise.name}</span></p>

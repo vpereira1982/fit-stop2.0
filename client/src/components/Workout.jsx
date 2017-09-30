@@ -26,6 +26,7 @@ class Workout extends React.Component {
   }
 
    render() {
+   	{this.props.hideButtons}
     return (
     <div className="workout">
 	  <span className={'warmupTitle ' + (this.state.warmupActive ? 'activeTitle' : null)}>Warmup</span>

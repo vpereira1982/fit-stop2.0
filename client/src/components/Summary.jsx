@@ -1,5 +1,6 @@
 var Summary = (props) => (
   <div className="summary">
+  {props.showButtons}
     <h1>Workout Summary</h1>
     <span className="summaryCongrats congratulations">All Done! Congratulations! 🎉</span> <br />
     {!props.loggedIn && (<span className="alert">⚠️  You are currently not logged in. Workout Summary data will not be saved.</span>)}

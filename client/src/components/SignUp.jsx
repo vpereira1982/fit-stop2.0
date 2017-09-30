@@ -1,6 +1,6 @@
 var SignUp = (props) => (
   <div className="signupPage">
-  Sign Up
+  <h1>Sign Up</h1>
   <form onSubmit={props.signup}>
   <label htmlFor="username">Username:  </label>
       <input id="username" type="text" name="username"/>

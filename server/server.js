@@ -19,6 +19,7 @@ var salt = bcrypt.genSaltSync(saltRounds);
 // querying the database
 // routing
 
+
 var app = express();
 app.listen(3000);
 app.use('/public', express.static('client/public'));
@@ -26,7 +27,7 @@ app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
@@ -105,12 +106,11 @@ app.get('/', (req,res)=>{
 app.get('/workout', getWorkouts);
 
 app.get('/history',(req,res)=>{
-  var name = 'harshsikka' // add req.body.username
+  var name = req.query.username;
   User.findOne({username: name}, function(err, data){
     if(err) {
       console.log('err happened with cooldown retrieval: ' + err);
     } else{
-      console.log(data.workoutHistory);
       res.send(data.workoutHistory);
     }
   })
@@ -124,22 +124,18 @@ app.get('/history',(req,res)=>{
 //right keys in the object.
 
 function addWorkout(req,res){
-  console.log('receiving data:', req.body);
 
-  var name = 'harshsikka' // change to req.body.username
-  var workoutObj = {}
+  var name = req.body.username;
+  var workoutObj = {};
   workoutObj.currentWorkout = req.body.currentWorkout;
   workoutObj.date = req.body.date;
   workoutObj.lengthOfWorkout = req.body.lengthOfWorkout;
 
   User.findOne({username: name}, function(err, user){
-    console.log(user);
     if(err) {
       console.log('err happened with cooldown retrieval: ' + err);
     } else{
       user.workoutHistory.unshift(workoutObj);
-      console.log(user.workoutHistory)
-
       user.save(function(err){
         if(err) {
           console.log(err + ' error happened!');
