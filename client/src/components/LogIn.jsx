@@ -1,5 +1,6 @@
 var Login = (props) => (
   <div className="loginPage">
+  Log In
   <form onSubmit={props.login}>
   <label htmlFor="username">Username:  </label>
       <input id="username" type="text" name="username"/>
