@@ -4,10 +4,16 @@ var db = require('./db').mongoose;
 var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
 var path = require('path');
+var bcrypt = require('bcrypt');
+var ObjectID = require('mongodb').ObjectID;
 
 var session = require('express-session');
 
 //import database info
+
+//bcrypt info
+const saltRounds = 10;
+var salt = bcrypt.genSaltSync(saltRounds);
 
 //handle all the data gathering methods
 // querying the database
@@ -44,7 +50,7 @@ console.log('server is running');
 // define api routes here
 
 function getWorkouts(req,res){
-  var returnObj = []
+  var returnObj = [];
 
 
   Exercise.find({type: 'warmup'}, function(err,data){
@@ -147,26 +153,64 @@ function addWorkout(req,res){
   })
 }
 
-// need to add user creation
-// need to add user verification
-
 app.post('/addWorkout', addWorkout);
 
 app.post('/login', function(req, res) {
-    // query the database for a username
-    // get the password
-    console.log('username:',req.body.username);
-    console.log('password:',req.body.password);
-    var currentUser = req.body.username;
-    if (req.body.username === 'harshsikka') { //check if user & pw is in database
-      req.session.regenerate(function() {
-        req.session.user = req.body.username;
-        res.status(200).send('logged in');
-      });
-    } else {
-      res.status(400).send('not logged in');
+  var name = req.body.username;
+  var pass = req.body.password;
+
+  User.findOne({
+    username:name
+  }, function(err, data) {
+    console.log(data)
+    if (!err) {
+      if (bcrypt.compareSync(name, data.password)=== true) {
+        req.session.regenerate(function () {
+          req.session.user = name;
+          res.status(200).send('Log in success');
+        })
+      }else {
+        res.status(400).send('Log in attempt failed');
+      }
+    }else {
+      console.log("Database access error" + err);
+      res.redirect('/login');
     }
+  });
 });
 
 
+app.post('/signup', function(req, res) {
+  var name = req.body.username;
+  var pass = req.body.password;
+  var hash = bcrypt.hashSync(pass, salt);
+  var id = new ObjectID();
+
+  User.find({username: name}, function(err, user) {
+    if(!err){
+      if (!user[0]){
+        var newUser = new User({
+          _id: id,
+          username: name,
+          password: hash,
+          preferences: {}
+        });
+        newUser.save(function(err) {
+          if(!err){
+            req.session.regenerate(function(){
+              req.session.user = name;
+              res.redirect('/');
+            });
+          } else {
+            console.log(err);
+          }
+        })
+      } else {
+        console.log("User exsists");
+      }
+    } else {
+      console.log("Database access error" + err);
+    }
+  });
+});
 
