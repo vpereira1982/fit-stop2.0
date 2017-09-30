@@ -23,9 +23,7 @@
     "jquery": "^3.2.1",
     "mongoose": "^4.11.9",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
-  },
-  "devDependencies": {
+    "react-dom": "^15.6.1",
     "babel-cli": "^6.26.0"
   }
 }

@@ -1,30 +1,24 @@
-//return object format
-  // var returnObj = {
-  //   warmup: [],
-  //   workout: [],
-  //   cooldown: [],
-  // }
+/* * * * * * * * * * * * * * * * * * * * * * * * * *
+  This file saves an example workout with 15 exercises to an array
 
-//Dummy Data
+  The format of the exercises should be:
+  var exercise = {
+    name: String,
+    description: String,
+    type: String (one of the following: cooldown, warmup, exercise)
+    picture: String (url of image),
+    environment: String (either outdoor or indoor)
+    muscleGroup: String
+    difficulty: String
+  }
 
-// var userSchema = new Schema({
-//  username: String,
-//  Password: String(hashed),
-//  Preferences: Object,
-//  workoutHistory: Array
-//  });
+* * * * * * * * * * * * * * * * * * * * * * * * * */
 
-// Var exerciseSchema = new Schema({
-//   name: String,
-//   Description: String,
-//   type: String,[cooldown, warmup, exercise]
-//   Picture: String,
-//   Environment: String, [outdoor, indoor]
-//   muscleGroup: String, []
-//   Difficulty: String
-// })
 
-//warmup exercises
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Warm Up Exercises
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 var highKnees = {
   name: 'High Knees',
   description: 'Begin jogging in place, lifting the knees as high as you can. Try to lift your knees up to hip level but keep the core tight to support your back. For a more advanced move, hold your hands straight at hip level and try to touch the knees to your hands as you lift them.Bring the knees towards your hands instead of reaching the hands to the knees!',
@@ -55,7 +49,11 @@ var hipCircles = {
   difficulty: 'easy'
 }
 
-//main exercises
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Workout Exercises
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 var flutterKicks = {
   name: 'Flutter kicks',
   description: 'Lie on a mat with your hands under your buttocks and raise your legs slightly, keeping knees straight and ankles together.Keep abs engaged and perform short kicks in an alternating fashion.Repeat as needed and then lower legs to the ground.',
@@ -115,6 +113,7 @@ var sitUps = {
   muscleGroup: 'core',
   difficulty: 'intermediate'
 }
+
 var standingCrossBodyCrunches = {
   name: 'Standing Cross-Body Crunches',
   description: 'Standing up straight, bring your hands behind your head so that your elbows are pointed to the sides.Twisting your body, bring your left elbow down and across your body. At the same time, raise your right knee up and across to meet the left elbow.Return to the starting position.Repeat on the other side and continue alternating.',
@@ -124,6 +123,7 @@ var standingCrossBodyCrunches = {
   muscleGroup: 'core',
   difficulty: 'intermediate'
 }
+
 var bicycleCrunches = {
   name: 'Bicycle Crunches',
   description: 'Lie flat on an exercise mat on the floor keeping your lower back straight with no arching of your spine and with your knees bent and feet flat on the floor.Place your hands lightly on the sides of your head.Curl your torso upwards so your shoulders are slightly raised off the floor..Raise your knees until your thighs are at a right angle to the floor and your calves are parallel to the floor. This is the start position.Slowly move your legs in a pedaling action as if you are riding a bicycle.As you do so, exhale and bring your opposing elbow close to each knee by crunching to one side. Left elbow to right knee. Right elbow to left knee.After each crunch, return to the start position inhaling as you do so.Without pausing, repeat the movement to the other side.',
@@ -133,6 +133,7 @@ var bicycleCrunches = {
   muscleGroup: 'core',
   difficulty: 'intermediate'
 }
+
 var doubleSideJacknifes = {
   name: 'Double Side Jacknifes',
   description: 'Bring yourself to the ground and lie on your left side. Be sure to stack your feet.Place your left hand on your side while raising your right arm above your head so that the elbow is pointing towards the sky.Focusing all of the tension and contraction in the obliques, bring your feet up while you raise your upper body. Lead with the right elbow.Hold the contraction and slowly return to the starting position. Do not allow your feet or shoulder to touch the ground.Repeat.',
@@ -142,18 +143,21 @@ var doubleSideJacknifes = {
   muscleGroup: 'core',
   difficulty: 'intermediate'
 }
-//cooldown exercises
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Cooldown Exercises
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 var cobra = {
   name: 'cobra stretch',
-  Description: 'Lie face down with your hands under your shoulders.Point your feet downwards to lengthen your spine.Slowly push your torso up as far as you comfortably can – try to get your hips to rise off the floor slightly.Hold the stretch and then lower down to starting position.',
+  description: 'Lie face down with your hands under your shoulders.Point your feet downwards to lengthen your spine.Slowly push your torso up as far as you comfortably can – try to get your hips to rise off the floor slightly.Hold the stretch and then lower down to starting position.',
   type: 'cooldown',
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Cobra_Stretch_M_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
   difficulty: 'easy'
-
 }
+
 var ragdoll = {
   name: 'Rag Doll',
   description: 'Stand tall with your feet together and arms at your sides.Slowly, bend at the hips while keeping your knees engaged. Allow your upper body to hang over. Let your arms drop as well, dangling in front of you.Once you’re fully bent over and your hands are at your toes, pause and feel the stretch in your hamstrings.',
@@ -163,6 +167,7 @@ var ragdoll = {
   muscleGroup: 'core',
   difficulty: 'easy'
 }
+
 var scorpionStretch = {
   name: 'Scorpion Stretch',
   description: 'Lie face down on a mat or soft surface.Place your hands at your sides for balance.Keeping your shoulders touching the ground, raise the left foot straight up into the air.Bend at the knee and bring your left foot over to your right side. Tap the ground with your toes.Return the left leg to the ground and repeat on the other side.',
@@ -172,5 +177,9 @@ var scorpionStretch = {
   muscleGroup: 'core',
   difficulty: 'easy'
 }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Add all the exercises to an array
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 window.exampleExerciseData = [highKnees, flutterKicks, cobra, catCow, hipCircles,  plank, plankKneeToElbow, windshieldWipers, reverseCrunch, sitUps, standingCrossBodyCrunches, bicycleCrunches, doubleSideJacknifes,  ragdoll, scorpionStretch];
