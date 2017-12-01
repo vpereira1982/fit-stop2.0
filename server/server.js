@@ -1,4 +1,4 @@
-var express = require('express')
+var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 
@@ -7,14 +7,17 @@ var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
 var ObjectID = require('mongodb').ObjectID;
 
-
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
-var salt = bcrypt.genSaltSync(saltRounds);
-
 var app = express();
 
+var session = require('express-session')
+var FileStore = require('session-file-store')(session);
+
+var bcrypt = require('bcrypt');
+var saltRounds = 10;
+var salt = bcrypt.genSaltSync(saltRounds);
+
 app.listen(process.env.PORT || 3000);
+
 
 app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
@@ -25,14 +28,43 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 console.log('server is running');
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  User Persistent Session
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  store: new FileStore(),
+  saveUninitialized: true,
+  cookie: { secret: 'hello', maxAge: null, secure: false}
+}))
+
+app.use(function(req, res, next) {
+  var sess = req.session
+  if (sess.views) {
+    sess.views++
+  } else {
+    sess.views = 1
+  }
+  console.log('this is the session id', req.session.id)
+
+  next();
+})
+
+
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   API Routes
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-app.get('/', (req,res)=> {
+app.get('/', (req,res) => {
   res.sendFile('index.html', { root: 'client/public'});
 });
+
+app.get('/islogged', checkSession);
 app.get('/workout', getWorkout);
 app.get('/history', getHistory);
 
@@ -134,6 +166,7 @@ function checkLogin(req, res) {
     } else {
       if (data) {
         if (bcrypt.compareSync(pass, data.password)=== true) {
+          req.session.name = name
           res.status(200).send('Log in success');
         } else {
           res.status(400).send('Log in attempt failed');
@@ -143,6 +176,24 @@ function checkLogin(req, res) {
       }
     }
   });
+}
+
+
+function checkSession(req, res) {
+  console.log('this is the session name from checkSession cb', req.session.name)
+  if (req.session.name) {
+    User.findOne({username: req.session.name}, function(err, data) {
+      if (err) {
+        console.log("Database access error" + err);
+      } else {
+        if (data) {
+          res.status(200).send(req.session.name);
+        }
+      }
+    });
+  } else {
+    res.end('bye bye');
+  }
 }
 
 
@@ -171,7 +222,7 @@ function addSignup(req, res) {
           }
         });
       } else {
-        res.status(400).send('User exsists');
+        res.status(400).send('User exists');
       }
     }
   });

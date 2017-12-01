@@ -29,6 +29,23 @@ class App extends React.Component {
 
   }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Checks if user session is persistent (v2.0)
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  componentDidMount() {
+    $.ajax({
+      type: 'GET',
+      url: 'http://127.0.0.1:3000/islogged',
+      success: (data) => {
+        console.log('this is the data back from the server', data);
+      },
+      error: (err) => {
+        console.log('componentDidMount failed to fetch');
+      }
+    });
+  }
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   The following functions change the view on the app
