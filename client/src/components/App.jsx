@@ -40,16 +40,18 @@ class App extends React.Component {
         url: '/islogged',
         success: (data) => {
           console.log('this is the data back from the server', data);
+          if (data) {
           this.setState({username: data});
           this.setState({loggedIn: true});
           this.goToDashboard();
+          }
         },
         error: (err) => {
           console.log('componentDidMount failed to fetch');
         }
-    });
-  }, 1000);
-}
+      });
+    }, 800);
+  }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *

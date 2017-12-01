@@ -1,23 +1,27 @@
 var express = require('express');
+var db = require('./db').mongoose;
 var bodyParser = require('body-parser');
 var path = require('path');
 
-var db = require('./db').mongoose;
 var Exercise = require('./db').exerciseModel;
 var User = require('./db').userModel;
 var ObjectID = require('mongodb').ObjectID;
-
-var app = express();
-
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
+
+var app = express();
 
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 var salt = bcrypt.genSaltSync(saltRounds);
 
 app.listen(process.env.PORT || 3000);
+console.log('server is running');
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Middleware
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
@@ -26,19 +30,17 @@ app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-console.log('server is running');
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   User Persistent Session
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   store: new FileStore(),
   saveUninitialized: true,
-  cookie: { secret: 'hello', maxAge: null, secure: false}
+  cookie: { secret: 'hello', maxAge: 86400, secure: false}
 }))
 
 app.use(function(req, res, next) {
@@ -49,11 +51,8 @@ app.use(function(req, res, next) {
     sess.views = 1
   }
   console.log('this is the session id', req.session.id)
-
   next();
 })
-
-
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -61,7 +60,7 @@ app.use(function(req, res, next) {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 app.get('/', (req,res) => {
-  res.sendFile('index.html', { root: 'client/public'});
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 app.get('/islogged', checkSession);
@@ -191,8 +190,6 @@ function checkSession(req, res) {
         }
       }
     });
-  } else {
-    res.end('bye bye');
   }
 }
 
