@@ -40,7 +40,7 @@ app.use(session({
   resave: false,
   store: new FileStore(),
   saveUninitialized: true,
-  cookie: { secret: 'hello', maxAge: 86400, secure: false}
+  cookie: { secret: 'hello', maxAge: 1000 * 60 * 60 *24 * 365, secure: false}
 }))
 
 app.use(function(req, res, next) {
@@ -187,6 +187,8 @@ function checkSession(req, res) {
       } else {
         if (data) {
           res.status(200).send(req.session.name);
+        } else {
+          res.status(400).send(false);
         }
       }
     });
