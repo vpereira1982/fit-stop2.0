@@ -34,17 +34,22 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   componentDidMount() {
-    $.ajax({
-      type: 'GET',
-      url: 'http://127.0.0.1:3000/islogged',
-      success: (data) => {
-        console.log('this is the data back from the server', data);
-      },
-      error: (err) => {
-        console.log('componentDidMount failed to fetch');
-      }
+    setTimeout(() => {
+      $.ajax({
+        method: 'GET',
+        url: '/islogged',
+        success: (data) => {
+          console.log('this is the data back from the server', data);
+          this.setState({username: data});
+          this.setState({loggedIn: true});
+          this.goToDashboard();
+        },
+        error: (err) => {
+          console.log('componentDidMount failed to fetch');
+        }
     });
-  }
+  }, 1000);
+}
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -213,6 +218,10 @@ class App extends React.Component {
     this.setState({loggedIn: false});
     this.setState({username: null});
     this.goToDashboard();
+  }
+
+  test() {
+
   }
 
 
