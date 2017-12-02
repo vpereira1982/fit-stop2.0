@@ -73,6 +73,11 @@ app.post('/addWorkout', addWorkout);
 app.post('/login', checkLogin);
 app.post('/signup', addSignup);
 
+//DELETE THIS!
+app.post('/createworkout', function(req, res) {
+  console.log('this is a test to confirm the post request from the form arriveddd....')
+});
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Request Handlers
