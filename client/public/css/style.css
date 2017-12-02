@@ -176,6 +176,10 @@ body {
   margin-top: 10px;
 }
 
+.exerciseBullet {
+  text-align: left;
+}
+
 .countdownCircle {
   background-image: url(../images/pizzagif.gif);
   width: 25%;
