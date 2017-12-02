@@ -225,6 +225,12 @@ class App extends React.Component {
   logOut() {
     this.setState({loggedIn: false});
     this.setState({username: null});
+    $.ajax({
+      type: 'GET',
+      url: '/destroyCookie',
+      success: () => {console.log('user logged out')},
+      error: () => {console.log('logout failed')}
+    });
     this.goToDashboard();
   }
 

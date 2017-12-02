@@ -302,10 +302,15 @@ label {
   margin: 10px 5px;
 }
 
+input {
+  padding: 4px;
+  margin-left: 5px;
+}
+
 input[id=username], input[id=password] {
   display: inline-block;
   float: left;
-  padding: 5px;
+  /*padding: 5px;*/
   margin: 10px 5px;
   width: 65%;
 }
@@ -321,12 +326,13 @@ input[id=username]:focus, input[id=password]:focus {
 input[type=submit] {
   display: block;
   background-color: #000000;
-  -webkit-border-radius: 8;
-  -moz-border-radius: 8;
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
   border-radius: 8px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: bold;
   padding: 10px 50px;
   vertical-align: middle;
   margin-bottom: 20px;
@@ -337,10 +343,27 @@ label.createWorkout {
   float: left;
   clear: both;
   width: 100%;
+  font-size: 15px;
   text-align: left;
   padding: 5px;
   margin: 10px 5px;
 }
-input.btn-createWorkout-Form {
+
+select.workoutType {
+  background-color: #002350;
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  margin-left: 10px;
+  font-size: 14px;
+   height: 29px;
+   padding: 5px;
+   width: 150px;
+}
+
+input.description {
+  width: 400px;
 }
 
