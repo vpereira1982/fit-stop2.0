@@ -18,6 +18,7 @@ class App extends React.Component {
       expendedCalories: null
     };
 
+    this.getUserInfo();
     this.goToWorkout = this.goToWorkout.bind(this);
     this.goToSummary = this.goToSummary.bind(this);
     this.goToDashboard = this.goToDashboard.bind(this);
@@ -36,8 +37,9 @@ class App extends React.Component {
   Checks if user session is persistent (v2.0)
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  componentDidMount() {
-    setTimeout(() => {
+  getUserInfo() {
+    // this.getExercises();
+    // setTimeout(() => {
       $.ajax({
         method: 'GET',
         url: '/islogged',
@@ -53,7 +55,7 @@ class App extends React.Component {
           console.log('componentDidMount failed to fetch');
         }
       });
-    }, 800);
+    // }, 800);
   }
 
 
