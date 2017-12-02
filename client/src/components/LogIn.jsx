@@ -8,6 +8,8 @@ var Login = (props) => (
       <input id="password" type="password" name="password"/>
       <input type="submit" value="Log In"/>
     </form>
+    <button onClick={() => props.goToDashboard()}>Back to Dashboard
+    </button>
   </div>
 );
 

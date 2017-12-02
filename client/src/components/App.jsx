@@ -303,10 +303,10 @@ class App extends React.Component {
         return (<Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} loggedIn={this.state.loggedIn} />);
       }
       if (this.state.currentState === 'Login') {
-          return (<Login login={this.login} />);
+          return (<Login login={this.login} goToDashboard={this.goToDashboard}/>);
       }
       if (this.state.currentState === 'SignUp') {
-          return (<SignUp signup={this.signup}  />);
+          return (<SignUp signup={this.signup} goToDashboard={this.goToDashboard} />);
       }
       if (this.state.currentState === 'Countdown') {
           return (<Countdown countdown={this.state.countdown} />);
