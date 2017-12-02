@@ -67,6 +67,7 @@ app.get('/', (req,res) => {
 app.get('/islogged', checkSession);
 app.get('/workout', getWorkout);
 app.get('/history', getHistory);
+app.get('/destroyCookie', destroyCookie);
 
 app.post('/addWorkout', addWorkout);
 app.post('/login', checkLogin);
@@ -228,4 +229,9 @@ function addSignup(req, res) {
   });
 }
 
-
+function destroyCookie(req, res) {
+  req.session.destroy(function(err) {
+    if (err) { throw err };
+    res.status(200).end();
+  });
+}
