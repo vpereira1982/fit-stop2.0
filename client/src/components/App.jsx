@@ -30,6 +30,7 @@ class App extends React.Component {
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
+    this.createWorkout = this.createWorkout.bind(this);
 
   }
 
@@ -227,8 +228,10 @@ class App extends React.Component {
     this.goToDashboard();
   }
 
-  test() {
-
+  createWorkout() {
+    this.setState({
+      currentState: 'createWorkout'
+    });
   }
 
 
@@ -316,6 +319,9 @@ class App extends React.Component {
       if (this.state.currentState === 'Workout') {
         return (<Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />);
       }
+      if (this.state.currentState === 'createWorkout') {
+        return (<CreateWorkout />);
+      }
       if (this.state.currentState === 'Summary') {
         return (<Summary
           goToDashboard={this.goToDashboard}
@@ -330,7 +336,7 @@ class App extends React.Component {
 
     return (
       <div className = "App">
-        <Header username={this.state.username} goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons}/>
+        <Header username={this.state.username} goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons} createWorkout={this.createWorkout} />
         {toBeRendered()}
       </div>
     )
