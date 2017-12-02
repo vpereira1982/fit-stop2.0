@@ -292,7 +292,7 @@ body {
   color: #000;
 }
 
-label{
+label {
   display: inline-block;
   float: left;
   clear: left;
@@ -332,5 +332,15 @@ input[type=submit] {
   margin-bottom: 20px;
 }
 
-
+label.createWorkout {
+  display: inline-block;
+  float: left;
+  clear: both;
+  width: 100%;
+  text-align: left;
+  padding: 5px;
+  margin: 10px 5px;
+}
+input.btn-createWorkout-Form {
+}
 

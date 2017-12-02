@@ -26,6 +26,7 @@ console.log('server is running');
 app.use('/public', express.static('client/public'));
 app.use('/react', express.static('node_modules/react/dist'));
 app.use('/react-dom', express.static('node_modules/react-dom/dist'));
+app.use('/react-router', express.static('node_modules/react-router'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
