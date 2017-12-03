@@ -31,7 +31,6 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.createWorkout = this.createWorkout.bind(this);
-
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -105,6 +104,12 @@ class App extends React.Component {
     if (this.state.loggedIn) {
       this.sendWorkoutData();
     }
+  }
+
+  createWorkout() {
+    this.setState({
+      currentState: 'createWorkout'
+    });
   }
 
 
@@ -232,12 +237,6 @@ class App extends React.Component {
       error: () => {console.log('logout failed')}
     });
     this.goToDashboard();
-  }
-
-  createWorkout() {
-    this.setState({
-      currentState: 'createWorkout'
-    });
   }
 
 
