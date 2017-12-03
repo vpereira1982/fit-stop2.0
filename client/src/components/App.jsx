@@ -15,7 +15,8 @@ class App extends React.Component {
       workoutLengthInMins: 15,
       elapsedTime: null,
       completedWorkouts: [],
-      expendedCalories: 0
+      expendedCalories: 0,
+      userWeight: 160
     };
 
     this.getUserInfo();
@@ -281,7 +282,7 @@ timer() {
       var currentExercise = this.state.currentWorkout[next];
       completedWorkouts.push(currentExercise)
       var expCal = this.state.expendedCalories + this.state.userWeight * currentExercise.metValue * (1 / 60);
-      this.setState({expendedCalories: Math.ceil(expCal)});
+      this.setState({expendedCalories: Math.round(expCal)});
       next++;
       this.setState({currentExercise: next, completedWorkouts: completedWorkouts});
       this.refs.workoutPage.highlightActiveTitle();
@@ -339,7 +340,8 @@ timer() {
           loggedIn={this.state.loggedIn}
           elapsedTime={this.state.elapsedTime}
           formatTime={this.formatSummaryTime}
-          completedWorkouts={this.state.completedWorkouts}/>);
+          completedWorkouts={this.state.completedWorkouts}
+          expendedCalories={this.state.expendedCalories}/>);
       }
     }
 
