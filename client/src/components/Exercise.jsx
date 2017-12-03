@@ -6,7 +6,7 @@ var Exercise = (props) => {
   if (instructions[instructions.length - 1] === '') {
     instructions = instructions.slice(0, -1);
   };
-  console.log('instructions', instructions)
+  //console.log('instructions', instructions)
   return(
     <div className="exercise">
       <div className="exerciseDescription">

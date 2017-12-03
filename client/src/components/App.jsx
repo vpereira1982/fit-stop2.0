@@ -15,7 +15,8 @@ class App extends React.Component {
       workoutLengthInMins: 15,
       elapsedTime: null,
       completedWorkouts: [],
-      expendedCalories: null
+      expendedCalories: 0,
+      userWeight: 160
     };
 
     this.getUserInfo();
@@ -267,17 +268,21 @@ class App extends React.Component {
     this.setState({interval: interval});
   }
 
-  timer() {
+timer() {
     var completedWorkouts = this.state.completedWorkouts;
     var current = this.state.time;
     var elapsedTime = 900 - current;
+    var caloriesBurned = 0;
     current--;
     this.setState({time: current, elapsedTime: elapsedTime});
     if (this.state.time <= 0) {
       this.goToSummary();
     } else if (this.state.time % 60 === 0) {
       var next = this.state.currentExercise;
-      completedWorkouts.push(this.state.currentWorkout[next])
+      var currentExercise = this.state.currentWorkout[next];
+      completedWorkouts.push(currentExercise)
+      var expCal = this.state.expendedCalories + this.state.userWeight * currentExercise.metValue * (1 / 60);
+      this.setState({expendedCalories: Math.round(expCal)});
       next++;
       this.setState({currentExercise: next, completedWorkouts: completedWorkouts});
       this.refs.workoutPage.highlightActiveTitle();
@@ -335,7 +340,8 @@ class App extends React.Component {
           loggedIn={this.state.loggedIn}
           elapsedTime={this.state.elapsedTime}
           formatTime={this.formatSummaryTime}
-          completedWorkouts={this.state.completedWorkouts}/>);
+          completedWorkouts={this.state.completedWorkouts}
+          expendedCalories={this.state.expendedCalories}/>);
       }
     }
 

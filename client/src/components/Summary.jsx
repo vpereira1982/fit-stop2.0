@@ -11,7 +11,7 @@ var Summary = (props) => {
     return item.type === 'cooldown';
   });
 
-  console.log(warmups, mainWorkouts, cooldowns);
+  console.log("In summary:", warmups, mainWorkouts, cooldowns);
 
  return (
     <div className="summary">
@@ -22,10 +22,44 @@ var Summary = (props) => {
         <h3 className="summaryTitle"> Date: </h3> {props.workoutDate}
         <h3 className="summaryTitle"> Length of Workout: </h3> {props.formatTime(props.elapsedTime)}
 
-        <h3 className="summaryTitle"> Warmup: </h3>{props.currentWorkout[0].name}, {props.currentWorkout[1].name}, {props.currentWorkout[2].name}
+         <h3 className="summaryTitle"> Warmup: </h3>
+         {warmups.length > 0 ? warmups.map( item => {
+           return (
+             <div>
+               <ul>
+                 <li> {item.name} </li>
+               </ul>
+             </div>
+           )
+         })
+        : null}
 
-        <h3 className="summaryTitle"> Workout: </h3>{props.currentWorkout[3].name}, {props.currentWorkout[4].name}, {props.currentWorkout[5].name}, {props.currentWorkout[6].name}, {props.currentWorkout[7].name}, {props.currentWorkout[8].name}, {props.currentWorkout[9].name}, {props.currentWorkout[10].name}, {props.currentWorkout[11].name}
-        <h3 className="summaryTitle"> Cooldown: </h3>{props.currentWorkout[12].name}, {props.currentWorkout[13].name}, {props.currentWorkout[14].name}
+        <h3 className="summaryTitle"> Workout: </h3>
+        {mainWorkouts.length > 0 ? mainWorkouts.map( item => {
+          return (
+            <div>
+              <ul>
+                <li> {item.name} </li>
+              </ul>
+            </div>
+          )
+        })
+       : null}
+
+       <h3 className="summaryTitle"> Cooldown: </h3>
+       {cooldowns.length > 0 ? cooldowns.map( item => {
+         return (
+           <div>
+             <ul>
+               <li> {item.name} </li>
+             </ul>
+           </div>
+         )
+       })
+      : null}
+
+      <h3 className="summaryTitle">Calories expended: </h3>{props.expendedCalories}
+
       </div>
       <span className="summaryQuote">"Good things come to those who sweat."</span>
       <button onClick={props.goToDashboard} className="blackButton">Back To Dashboard</button>
@@ -35,15 +69,3 @@ var Summary = (props) => {
 
 
 window.Summary = Summary;
-
-/*
-
-workouts = [{
-  warmup:
-
-}
-
-]
-
-
-*/
