@@ -33,6 +33,8 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.createWorkout = this.createWorkout.bind(this);
+    this.submitExercise = this.submitExercise.bind(this);
+
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -250,13 +252,33 @@ class App extends React.Component {
   logOut() {
     this.setState({loggedIn: false});
     this.setState({username: null});
+
+    // Delete cookies on Server-side
     $.ajax({
       type: 'GET',
       url: '/destroyCookie',
       success: () => {console.log('user logged out')},
       error: () => {console.log('logout failed')}
     });
+
+    // Delete cookies on Client-side
+     var cookies = document.cookie.split(";");
+     for (var i = 0; i < cookies.length; i++) {
+       deleteCookie(cookies[i].split("=")[0]);
+     }
+
     this.goToDashboard();
+  }
+
+  submitExercise(data) {
+    console.log('it got to submitExercise', data);
+    alert('it got to submit exercise!')
+    var request = new XMLHttpRequest();
+    request.open("POST", "/createworkout");
+    request.send(data);
+    this.setState({
+      visible: !this.state.visible
+    })
   }
 
 
@@ -349,7 +371,7 @@ timer() {
         return (<Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />);
       }
       if (this.state.currentState === 'createWorkout') {
-        return (<CreateWorkout />);
+        return (<CreateWorkout submitExercise={this.submitExercise} visible={this.state.visible} />);
       }
       if (this.state.currentState === 'Profile') {
         return ( <Profile />)
