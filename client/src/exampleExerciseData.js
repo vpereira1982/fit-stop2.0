@@ -26,7 +26,8 @@ var highKnees = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/High_Knees1.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'easy'
+  difficulty: 'easy',
+  metValue: 3.5
 }
 
 var catCow = {
@@ -36,7 +37,8 @@ var catCow = {
   picture: 'http://dingo.care2.com/pictures/greenliving/uploads/2013/03/Cat-Cow-Poses.jpg',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'easy'
+  difficulty: 'easy',
+  metValue: 3.5
 }
 
 var hipCircles = {
@@ -46,7 +48,8 @@ var hipCircles = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Hip_Circles-1.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'easy'
+  difficulty: 'easy',
+  metValue: 3.5
 }
 
 
@@ -61,7 +64,8 @@ var flutterKicks = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Flutter_Kicks_M_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 var plank = {
@@ -71,7 +75,8 @@ var plank = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Plank_F_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 var plankKneeToElbow = {
@@ -81,7 +86,8 @@ var plankKneeToElbow = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Plank_Knee_to_Elbow_F_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 var windshieldWipers = {
@@ -91,7 +97,8 @@ var windshieldWipers = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Windshield_wipers_M_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6.5
 }
 
 var reverseCrunch = {
@@ -101,7 +108,8 @@ var reverseCrunch = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Reverse_Crunch_F_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 var sitUps = {
@@ -111,7 +119,8 @@ var sitUps = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Sit-up_F_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 8
 }
 
 var standingCrossBodyCrunches = {
@@ -121,7 +130,8 @@ var standingCrossBodyCrunches = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Standing_Cross-body_Crunch1.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 var bicycleCrunches = {
@@ -131,7 +141,8 @@ var bicycleCrunches = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Bicycle_Crunches_Air-Bikes_M_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 var doubleSideJacknifes = {
@@ -141,7 +152,8 @@ var doubleSideJacknifes = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Double-Side_Jackknife.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'intermediate'
+  difficulty: 'intermediate',
+  metValue: 6
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -155,7 +167,8 @@ var cobra = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Cobra_Stretch_M_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'easy'
+  difficulty: 'easy',
+  metValue: 2
 }
 
 var ragdoll = {
@@ -165,7 +178,8 @@ var ragdoll = {
   picture: 'https://www.oxygenmag.com/.image/t_share/MTQ1MzQ3MzE1Njg4Mjg1NzUx/image-placeholder-title.jpg',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'easy'
+  difficulty: 'easy',
+  metValue: 2
 }
 
 var scorpionStretch = {
@@ -175,7 +189,8 @@ var scorpionStretch = {
   picture: 'http://workoutlabs.com/wp-content/uploads/watermarked/Scorpion_M_WorkoutLabs.png',
   environment: 'indoor',
   muscleGroup: 'core',
-  difficulty: 'easy'
+  difficulty: 'easy',
+  metValue: 2
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
