@@ -1,6 +1,7 @@
 class CreateWorkout extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
@@ -16,12 +17,12 @@ class CreateWorkout extends React.Component {
     <div>
       <form encType="multipart/form-data" onSubmit={this.handleSubmit} >
         <div>
-        <label className="createWorkout">Exercise Type:
-          <select className="workoutType" required>
-            <option value="warmup">Warm Up</option>
-            <option value="workout">Workout</option>
-            <option value="cooldown">Cooldown</option>
-          </select>
+          <label className="createWorkout">Exercise Type:
+            <select className="workoutType" required>
+              <option value="warmup">Warm Up</option>
+              <option value="workout">Workout</option>
+              <option value="cooldown">Cooldown</option>
+            </select>
           </label>
         </div>
         <div>
@@ -50,7 +51,7 @@ class CreateWorkout extends React.Component {
           <input type="submit" value="Submit" className="btn-createWorkout-Form" />
         </div>
       </form>
-      {this.props.visible ? () => (<p> The form has been submitted </p>) : null}
+      {this.props.visible ? <p style={{'color': 'green'}} > The form has been submitted </p> : <span></span>}
     </div>
     )
   }
