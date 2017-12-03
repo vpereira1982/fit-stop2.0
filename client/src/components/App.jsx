@@ -16,8 +16,7 @@ class App extends React.Component {
       elapsedTime: null,
       completedWorkouts: [],
       expendedCalories: 0,
-      userWeight: 160,
-      visible: false
+      userWeight: 160
     };
 
     this.getUserInfo();
@@ -27,13 +26,13 @@ class App extends React.Component {
     this.goToCountdown = this.goToCountdown.bind(this);
     this.goToLogin = this.goToLogin.bind(this);
     this.goToSignUp = this.goToSignUp.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
     this.getWorkoutHistory = this.getWorkoutHistory.bind(this);
     this.sendWorkoutData = this.sendWorkoutData.bind(this);
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.createWorkout = this.createWorkout.bind(this);
-    this.submitExercise = this.submitExercise.bind(this);
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -75,6 +74,10 @@ class App extends React.Component {
     if (this.state.interval) {
       clearInterval(this.state.interval);
     }
+  }
+
+  goToProfile() {
+    this.setState({currentState: 'Profile'});
   }
 
   goToLogin() {
@@ -119,6 +122,20 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  getSavedWorkouts() {
+    $.ajax({
+      method: 'GET',
+      url: '/savedWorkouts',
+      dataType: 'json',
+      data: {username: this.state.username},
+      complete:(data) => {
+        console.log('success', data)
+      },
+      error: (err) => {
+        console.log('err', err)
+      }
+    })
+  }
 
   getWorkoutHistory() {
     $.ajax({
@@ -242,17 +259,6 @@ class App extends React.Component {
     this.goToDashboard();
   }
 
-  submitExercise(data) {
-    console.log('it got to submitExercise', data);
-
-    var request = new XMLHttpRequest();
-    request.open("POST", "/createworkout");
-    request.send(data);
-    this.setState({
-      visible: !this.state.visible
-    })
-  }
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Countdown and Timer Functions
@@ -343,8 +349,12 @@ timer() {
         return (<Workout exercise={this.state.currentWorkout[this.state.currentExercise]} timer={this.formatTime(this.state.time)} countdown={this.state.countdown} goToSummary={this.goToSummary} goToDashboard={this.goToDashboard} ref="workoutPage" />);
       }
       if (this.state.currentState === 'createWorkout') {
-        return (<CreateWorkout submitExercise={this.submitExercise} visible={this.state.visible}/>);
+        return (<CreateWorkout />);
       }
+      if (this.state.currentState === 'Profile') {
+        return ( <Profile />)
+      }
+
       if (this.state.currentState === 'Summary') {
         return (<Summary
           goToDashboard={this.goToDashboard}
@@ -360,7 +370,7 @@ timer() {
 
     return (
       <div className = "App">
-        <Header username={this.state.username} goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons} createWorkout={this.createWorkout} />
+        <Header username={this.state.username} goToLogin={this.goToLogin} goToSignUp={this.goToSignUp} loggedIn={this.state.loggedIn} logOut={this.logOut} showButtons={this.state.showButtons} createWorkout={this.createWorkout} goToProfile={this.goToProfile}/>
         {toBeRendered()}
       </div>
     )
