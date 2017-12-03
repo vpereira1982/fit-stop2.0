@@ -4,6 +4,7 @@ var Header = (props) => (
       <div>
         <button className='blackButton' onClick={props.logOut}>Log Out</button>
         <button className='blackButton' onClick={props.createWorkout}>Add Workout</button>
+        <button className='blackButton' onClick={props.goToProfile}>Profile</button>
       </div>)
     }
     {props.showButtons && !props.loggedIn && (<button className='blackButton' onClick={props.goToLogin}>Log In</button>)}
