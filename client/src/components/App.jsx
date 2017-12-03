@@ -271,13 +271,6 @@ class App extends React.Component {
   }
 
   submitExercise(exerciseData) {
-    for (var p of exerciseData) {
-      console.log(p);
-    }
-
-/*    let request = new XMLHttpRequest();
-    request.open('POST', '/createworkout', true);
-    request.send(exerciseData);*/
     $.ajax({
       type: 'POST',
       url: '/createworkout',

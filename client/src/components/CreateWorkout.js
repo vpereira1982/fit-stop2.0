@@ -53,7 +53,7 @@ class CreateWorkout extends React.Component {
           <input type="submit" value="Submit" className="btn-createWorkout-Form" />
         </div>
       </form>
-      {this.props.visible ? <p style={{'color': 'green'}} > Your Workout has been submitted. </p> : <span></span>}
+      {this.props.visible ? <p style={{'color': 'green'}} > Your Workout has been submitted </p> : <span></span>}
     </div>
     )
   }
