@@ -69,8 +69,6 @@ class App extends React.Component {
             loggedIn: true,
             ownerExerciseList: data.workoutList
           });
-          // this.setState({loggedIn: true});
-          // this.getWorkoutList();
           this.goToDashboard();
           }
         },
@@ -176,8 +174,6 @@ class App extends React.Component {
   }
 
   addExerciseToUser(exercise) {
-    // console.log('user', this.state.username)
-    // console.log('exercise to be added', exercise)
     var Obj = {
       username: this.state.username,
       exercise: exercise
@@ -505,7 +501,7 @@ timer() {
         return ( <Profile
           ownerExerciseList={this.state.ownerExerciseList}
           removeExerciseFromUser={this.removeExerciseFromUser}
-          ProfileView={this.state.profileView}
+          profileView={this.state.profileView}
           addExerciseToUser={this.addExerciseToUser}
           changeProfileView={this.changeProfileView}
           warmupList={this.state.warmupList}
