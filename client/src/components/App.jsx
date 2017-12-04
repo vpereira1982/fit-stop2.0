@@ -19,7 +19,8 @@ class App extends React.Component {
       userWeight: 160,
       warmupList: null,
       workoutList: null,
-      cooldownList: null
+      cooldownList: null,
+      profileView: 'profile'
     };
 
     this.getUserInfo();
@@ -40,6 +41,7 @@ class App extends React.Component {
     this.signup = this.signup.bind(this);
     this.createWorkout = this.createWorkout.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
+    this.changeProfileView = this.changeProfileView.bind(this);
     // this.getWarmups();
     // this.getExerciseByType('cooldown');
     this.getAllExercises();
@@ -126,6 +128,10 @@ class App extends React.Component {
     this.setState({
       currentState: 'createWorkout'
     });
+  }
+
+  changeProfileView(view) {
+    this.setState({profileView: view});
   }
 
 
@@ -433,7 +439,7 @@ timer() {
         return (<CreateWorkout submitExercise={this.submitExercise} visible={this.state.visible} />);
       }
       if (this.state.currentState === 'Profile') {
-        return ( <Profile warmupList={this.state.warmupList} workoutList={this.state.workoutList} cooldownList={this.state.cooldownList}/>)
+        return ( <Profile profileView={this.state.profileView} changeProfileView={this.changeProfileView} warmupList={this.state.warmupList} workoutList={this.state.workoutList} cooldownList={this.state.cooldownList}/>)
       }
 
       if (this.state.currentState === 'Summary') {
