@@ -93,13 +93,20 @@ app.post('/addWorkout', addWorkout);
 app.post('/login', checkLogin);
 app.post('/signup', addSignup);
 app.post('/createworkout', saveWorkout);
+app.post('/addExerciseToUser', addExerciseToUser);
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Request Handlers
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+function addExerciseToUser(req, res) {
+  console.log('in addExerciseToUser in server')
+  console.log('req', req.query)
+}
+
+
 function getWorkoutList(req, res) {
-  console.log('in getWorkoutList in server', req.query)
+  // console.log('in getWorkoutList in server', req.query)
   User.findOne({username: req.query.username}, function(err, data) {
     if (err) {
       console.log('err getting owner workout List from db')
@@ -299,7 +306,7 @@ function checkSession(req, res) {
         console.log("Database access error" + err);
       } else {
         if (data) {
-          res.status(200).send(req.session.name);
+          res.status(200).send(data);
         } else {
           res.status(400).send(false);
         }

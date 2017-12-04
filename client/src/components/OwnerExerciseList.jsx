@@ -1,11 +1,12 @@
 var OwnerExerciseList = (props) => {
-  // console.log('in owner ex list', props.OwnerExerciseList)
-  var warm = props.ownerExerciseList[0];
-  var work = props.ownerExerciseList[1];
-  var cool = props.ownerExerciseList[2];
+  console.log('in owner ex list', props.ownerExerciseList)
+  var warm = props.ownerExerciseList.filter(ex => ex.type === 'warmup');
+  var work = props.ownerExerciseList.filter(ex => ex.type === 'workout');
+  var cool = props.ownerExerciseList.filter(ex => ex.type === 'cooldown');
+
   return (
     <div>
-      <h2>Your customized exercise list</h2><br>
+      <h2>Your customized exercise list...</h2><br></br>
       <div className="list">
         <h3>Warmups</h3>
         {warm.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
@@ -23,3 +24,21 @@ var OwnerExerciseList = (props) => {
 }
 
 window.OwnerExerciseList = OwnerExerciseList;
+
+/*
+ <div>
+      <h2>Your customized exercise list...</h2><br></br>
+      <div className="list">
+        <h3>Warmups</h3>
+        {warm.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
+      </div>
+      <div className="list">
+        <h3>Workouts</h3>
+        {work.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
+      </div>
+      <div className="list">
+        <h3>Cooldowns</h3>
+        {cool.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
+      </div>
+    </div>
+*/

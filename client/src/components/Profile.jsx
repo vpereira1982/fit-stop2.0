@@ -8,6 +8,7 @@ var Profile = (props) => {
       warmupList={props.warmupList}
       workoutList={props.workoutList}
       cooldownList={props.cooldownList}
+      changeProfileView={props.changeProfileView}
     />
   }
   if (props.profileView === 'usersList') {
@@ -19,6 +20,11 @@ var Profile = (props) => {
   }
   if (props.profileView === 'ownerExerciseList') {
     view = <OwnerExerciseList ownerExerciseList={props.ownerExerciseList}/>
+  }
+  if (props.profileView === 'exerciseCard') {
+    view = <ExerciseCard
+      exerciseCard={props.exerciseCard}
+    />
   }
 
   return (

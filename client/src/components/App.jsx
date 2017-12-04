@@ -21,7 +21,8 @@ class App extends React.Component {
       workoutList: null,
       cooldownList: null,
       profileView: 'profile',
-      ownerExerciseList: null
+      ownerExerciseList: null,
+      exerciseCard: null
     };
 
     this.getUserInfo();
@@ -60,9 +61,13 @@ class App extends React.Component {
         success: (data) => {
           console.log('this is the data back from the server', data);
           if (data) {
-          this.setState({username: data});
-          this.setState({loggedIn: true});
-          this.getWorkoutList();
+          this.setState({
+            username: data.username,
+            loggedIn: true,
+            ownerExerciseList: data.workoutList
+          });
+          // this.setState({loggedIn: true});
+          // this.getWorkoutList();
           this.goToDashboard();
           }
         },
@@ -131,23 +136,50 @@ class App extends React.Component {
     });
   }
 
-  changeProfileView(view) {
-    this.setState({profileView: view});
+  changeProfileView(view, exercise) {
+    console.log('in change profile view', exercise)
+    if (exercise) {
+      this.setState({
+        profileView: view,
+        exerciseCard: exercise
+      })
+    } else {
+      this.setState({profileView: view});
+    }
   }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  addExerciseToUser(exercise, user) {
+    console.log('exercise to be added', exercise, user)
+    // $.ajax({
+    //   method: 'post',
+    //   url: '/addExerciseToUser',
+    //   data: exercise,
+    //   complete:(data) => {
+    //     console.log('successfully added exercise to user')
+    //   },
+    //   error: (err) => {
+    //     console.log('could not add exercise to user')
+    //   }
+    // })
+  }
+
   getAllExercises() {
     $.ajax({
       method: 'GET',
       url: '/allExercises',
       success:(data) => {
+        var dummyList = this.state.currentWorkout;
+        var dummyWarmupList = this.state.currentWorkout.filter(ex => ex.type === 'warmup' && ex.name !== 'High Knees');
+        var dummyWorkList = this.state.currentWorkout.filter(ex => ex.type === 'workout' && ex.name !== 'Sit Ups');
+        var dummyCoolList = this.state.currentWorkout.filter(ex => ex.type === 'cooldown');
         this.setState({
-          warmupList: data[0],
-          workoutList: data[1],
-          cooldownList: data[2]
+          warmupList: data[0].concat(dummyWarmupList),
+          workoutList: data[1].concat(dummyWorkList),
+          cooldownList: data[2].concat(dummyCoolList)
         })
       },
       error: (err) => {
@@ -287,7 +319,7 @@ class App extends React.Component {
     const data = new FormData(event.target);
     var username = data.get('username');
     var password = data.get('password');
-    var workoutList = this.state.currentWorkout;
+    var workoutList = this.state.currentWorkout.filter(ex => !ex.createdBy);
 
     $.ajax({
       type: "POST",
@@ -442,7 +474,15 @@ timer() {
         return (<CreateWorkout submitExercise={this.submitExercise} visible={this.state.visible} />);
       }
       if (this.state.currentState === 'Profile') {
-        return ( <Profile ownerExerciseList={this.state.ownerExerciseList} profileView={this.state.profileView} changeProfileView={this.changeProfileView} warmupList={this.state.warmupList} workoutList={this.state.workoutList} cooldownList={this.state.cooldownList}/>)
+        return ( <Profile
+          ownerExerciseList={this.state.ownerExerciseList}
+          profileView={this.state.profileView}
+          changeProfileView={this.changeProfileView}
+          warmupList={this.state.warmupList}
+          workoutList={this.state.workoutList}
+          cooldownList={this.state.cooldownList}
+          exerciseCard={this.state.exerciseCard}
+          />)
       }
 
       if (this.state.currentState === 'Summary') {
