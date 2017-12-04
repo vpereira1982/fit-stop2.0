@@ -85,7 +85,7 @@ app.get('/workout', getWorkout);
 app.get('/history', getHistory);
 app.get('/destroyCookie', destroyCookie);
 app.get('/warmups', getWarmups);
-// app.get('/getWorkouts', getWorkouts);
+app.get('/allExercises', getAllExercises);
 app.get('/getExerciseByType', getExerciseByType);
 
 app.post('/addWorkout', addWorkout);
@@ -97,6 +97,32 @@ app.post('/createworkout', saveWorkout);
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Request Handlers
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+function getAllExercises(req, res) {
+  var results = [];
+  Exercise.find({type: 'warmup'}, function(err, data) {
+    if (err) {
+      console.log('err getting warmups')
+    } else {
+      results.push(data);
+      Exercise.find({type: 'workout'}, function(err, data) {
+        if (err) {
+          console.log('err getting workouts');
+        } else {
+          results.push(data);
+          Exercise.find({type: 'cooldown'}, function(err, data) {
+            if (err) {
+              console.log('err getting cooldowns')
+            } else {
+              results.push(data);
+              res.status(200).send(results);
+            }
+          })
+        }
+      })
+    }
+  })
+}
+
 function getExerciseByType(req, res) {
   console.log('getting exercises by type...', req.query);
   var typeObj = req.query;

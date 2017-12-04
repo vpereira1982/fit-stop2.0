@@ -367,3 +367,11 @@ input.description {
   width: 400px;
 }
 
+.list {
+  display: inline-block;
+  text-align: left;
+  margin-left: 10px;
+  width: 30%;
+  vertical-align: top;
+
+}
