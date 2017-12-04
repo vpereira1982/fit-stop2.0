@@ -87,6 +87,7 @@ app.get('/destroyCookie', destroyCookie);
 app.get('/warmups', getWarmups);
 app.get('/allExercises', getAllExercises);
 app.get('/getExerciseByType', getExerciseByType);
+app.get('/workoutList', getWorkoutList);
 
 app.post('/addWorkout', addWorkout);
 app.post('/login', checkLogin);
@@ -97,6 +98,18 @@ app.post('/createworkout', saveWorkout);
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Request Handlers
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+function getWorkoutList(req, res) {
+  console.log('in getWorkoutList in server', req.query)
+  User.findOne({username: req.query.username}, function(err, data) {
+    if (err) {
+      console.log('err getting owner workout List from db')
+    } else {
+      console.log('got owner workout list', data);
+      res.status(200).send(data.workoutList);
+    }
+  })
+}
+
 function getAllExercises(req, res) {
   var results = [];
   Exercise.find({type: 'warmup'}, function(err, data) {
@@ -299,6 +312,7 @@ function checkSession(req, res) {
 function addSignup(req, res) {
   var name = req.body.username;
   var pass = req.body.password;
+  var workoutList = req.body.workoutList;
   var hash = bcrypt.hashSync(pass, salt);
   var id = new ObjectID();
 
@@ -311,7 +325,8 @@ function addSignup(req, res) {
           _id: id,
           username: name,
           password: hash,
-          preferences: {}
+          preferences: {},
+          workoutList: workoutList
         });
         newUser.save(function(err) {
           if (err) {

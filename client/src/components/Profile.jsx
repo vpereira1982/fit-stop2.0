@@ -1,5 +1,4 @@
 var Profile = (props) => {
-  console.log('props in profile', props)
   var view = null;
   if (props.profileView === 'profile') {
     view = <UserProfile />
@@ -19,17 +18,17 @@ var Profile = (props) => {
     />
   }
   if (props.profileView === 'ownerExerciseList') {
-    view = <OwnerExerciseList />
+    view = <OwnerExerciseList ownerExerciseList={props.ownerExerciseList}/>
   }
 
   return (
     <div className="user-profile">
       Welcome to Profile page
       <div className="profile-nav-buttons">
-        <button className="tablink" onClick={() => props.changeProfileView('usersList')}>Users Exercise List</button>
-        <button className="tablink" onClick={() => props.changeProfileView('fitStopList')}>FitStop Exercise List</button>
-        <button className="tablink" onClick={() => props.changeProfileView('ownerList')}>Your Exercise List</button>
         <button className="tablink" id="defaultOpen" onClick={() => props.changeProfileView('profile')}>Profile</button>
+        <button className="tablink" onClick={() => props.changeProfileView('ownerExerciseList')}>Your Exercise List</button>
+        <button className="tablink" onClick={() => props.changeProfileView('fitStopList')}>FitStop Exercise List</button>
+        <button className="tablink" onClick={() => props.changeProfileView('usersList')}>Users Exercise List</button>
       </div>
       <div>
         {view}
