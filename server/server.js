@@ -99,10 +99,7 @@ app.post('/addExerciseToUser', addExerciseToUser);
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Request Handlers
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-function addExerciseToUser(req, res) {
-  console.log('in addExerciseToUser in server')
-  console.log('req', req.query)
-}
+
 
 
 function getWorkoutList(req, res) {
@@ -355,3 +352,27 @@ function destroyCookie(req, res) {
     res.status(200).end();
   });
 }
+
+function addExerciseToUser(req, res) {
+  User.update({username: req.body.username}, {$push: {workoutList: req.body.exercise}}, function(err, data) {
+    if (err) {
+      console.log('err adding exercise');
+      res.status(400).end('err not added!')
+    } else {
+      // console.log('successfull added exercise!', data);
+      res.status(200).send('successfully added exercise to user');
+    }
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+

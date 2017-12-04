@@ -39,6 +39,7 @@ class App extends React.Component {
     this.getWorkoutHistory = this.getWorkoutHistory.bind(this);
     this.getWorkoutList = this.getWorkoutList.bind(this);
     this.sendWorkoutData = this.sendWorkoutData.bind(this);
+    this.addExerciseToUser = this.addExerciseToUser.bind(this);
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -137,7 +138,6 @@ class App extends React.Component {
   }
 
   changeProfileView(view, exercise) {
-    console.log('in change profile view', exercise)
     if (exercise) {
       this.setState({
         profileView: view,
@@ -152,19 +152,24 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  addExerciseToUser(exercise, user) {
-    console.log('exercise to be added', exercise, user)
-    // $.ajax({
-    //   method: 'post',
-    //   url: '/addExerciseToUser',
-    //   data: exercise,
-    //   complete:(data) => {
-    //     console.log('successfully added exercise to user')
-    //   },
-    //   error: (err) => {
-    //     console.log('could not add exercise to user')
-    //   }
-    // })
+  addExerciseToUser(exercise) {
+    // console.log('user', this.state.username)
+    // console.log('exercise to be added', exercise)
+    var Obj = {
+      username: this.state.username,
+      exercise: exercise
+    };
+    $.ajax({
+      method: 'post',
+      url: '/addExerciseToUser',
+      data: Obj,
+      complete:(data) => {
+        this.getWorkoutList();
+      },
+      error: (err) => {
+        console.log('could not add exercise to user')
+      }
+    })
   }
 
   getAllExercises() {
@@ -477,6 +482,7 @@ timer() {
         return ( <Profile
           ownerExerciseList={this.state.ownerExerciseList}
           profileView={this.state.profileView}
+          addExerciseToUser={this.addExerciseToUser}
           changeProfileView={this.changeProfileView}
           warmupList={this.state.warmupList}
           workoutList={this.state.workoutList}
