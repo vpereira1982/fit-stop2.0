@@ -40,7 +40,8 @@ var userSchema = new Schema({
   username: String,
   password: String,
   preferences: {},
-  workoutHistory: []
+  workoutHistory: [],
+  workoutList: []
 });
 
 

@@ -20,7 +20,8 @@ class App extends React.Component {
       warmupList: null,
       workoutList: null,
       cooldownList: null,
-      profileView: 'profile'
+      profileView: 'profile',
+      ownerExerciseList: null
     };
 
     this.getUserInfo();
@@ -35,6 +36,7 @@ class App extends React.Component {
     this.getAllExercises = this.getAllExercises.bind(this);
     this.getExerciseByType = this.getExerciseByType.bind(this);
     this.getWorkoutHistory = this.getWorkoutHistory.bind(this);
+    this.getWorkoutList = this.getWorkoutList.bind(this);
     this.sendWorkoutData = this.sendWorkoutData.bind(this);
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
@@ -42,8 +44,6 @@ class App extends React.Component {
     this.createWorkout = this.createWorkout.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
     this.changeProfileView = this.changeProfileView.bind(this);
-    // this.getWarmups();
-    // this.getExerciseByType('cooldown');
     this.getAllExercises();
   }
 
@@ -62,6 +62,7 @@ class App extends React.Component {
           if (data) {
           this.setState({username: data});
           this.setState({loggedIn: true});
+          this.getWorkoutList();
           this.goToDashboard();
           }
         },
@@ -143,7 +144,6 @@ class App extends React.Component {
       method: 'GET',
       url: '/allExercises',
       success:(data) => {
-        console.log('success! all exercises::::', data);
         this.setState({
           warmupList: data[0],
           workoutList: data[1],
@@ -184,14 +184,15 @@ class App extends React.Component {
     })
   }
 
-  getSavedWorkouts() {
+  getWorkoutList() {
     $.ajax({
       method: 'GET',
-      url: '/savedWorkouts',
+      url: '/workoutList',
       dataType: 'json',
       data: {username: this.state.username},
       complete:(data) => {
-        console.log('success', data)
+        var results = JSON.parse(data.responseText);
+        this.setState({ownerExerciseList: results})
       },
       error: (err) => {
         console.log('err', err)
@@ -286,13 +287,15 @@ class App extends React.Component {
     const data = new FormData(event.target);
     var username = data.get('username');
     var password = data.get('password');
+    var workoutList = this.state.currentWorkout;
 
     $.ajax({
       type: "POST",
       url: '/signup',
       data: JSON.stringify({
         username: username,
-        password: password
+        password: password,
+        workoutList: workoutList
       }),
       contentType: 'application/json',
       dataType: 'json',
@@ -439,7 +442,7 @@ timer() {
         return (<CreateWorkout submitExercise={this.submitExercise} visible={this.state.visible} />);
       }
       if (this.state.currentState === 'Profile') {
-        return ( <Profile profileView={this.state.profileView} changeProfileView={this.changeProfileView} warmupList={this.state.warmupList} workoutList={this.state.workoutList} cooldownList={this.state.cooldownList}/>)
+        return ( <Profile ownerExerciseList={this.state.ownerExerciseList} profileView={this.state.profileView} changeProfileView={this.changeProfileView} warmupList={this.state.warmupList} workoutList={this.state.workoutList} cooldownList={this.state.cooldownList}/>)
       }
 
       if (this.state.currentState === 'Summary') {
