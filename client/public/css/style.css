@@ -373,5 +373,20 @@ input.description {
   margin-left: 10px;
   width: 30%;
   vertical-align: top;
+}
 
+.ex-card-name {
+ display: inline-block;
+ line-height: 40px;
+ height: 40px;
+}
+
+.ex-card-addButton {
+  padding-left: 20px;
+  padding-top:0px;
+  margin-top: 0px;
+}
+
+.ex-card-piece {
+  margin-top: 0px;
 }
