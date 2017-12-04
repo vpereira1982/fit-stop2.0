@@ -24,6 +24,7 @@ var Profile = (props) => {
   if (props.profileView === 'exerciseCard') {
     view = <ExerciseCard
       exerciseCard={props.exerciseCard}
+      addExerciseToUser={props.addExerciseToUser}
     />
   }
 
