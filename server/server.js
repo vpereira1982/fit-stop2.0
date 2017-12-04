@@ -84,6 +84,7 @@ app.get('/islogged', checkSession);
 app.get('/workout', getWorkout);
 app.get('/history', getHistory);
 app.get('/destroyCookie', destroyCookie);
+app.get('/warmups', getWarmups);
 
 app.post('/addWorkout', addWorkout);
 app.post('/login', checkLogin);
@@ -94,6 +95,17 @@ app.post('/createworkout', saveWorkout);
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Request Handlers
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+function getWarmups(req, res) {
+  console.log('getting warmups frm db...');
+  Exercise.find({type: 'warmup'}, function(err, data) {
+    if (err) {
+      console.log('err getting warmups from db');
+    } else {
+      console.log('success! warmups from db: ', data);
+      res.status(200).send(data);
+    }
+  })
+}
 
 function saveWorkout(req, res) {
   console.log('this is req.body', req.body);
