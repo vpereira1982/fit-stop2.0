@@ -94,7 +94,7 @@ app.post('/login', checkLogin);
 app.post('/signup', addSignup);
 app.post('/createworkout', saveWorkout);
 app.post('/addExerciseToUser', addExerciseToUser);
-app.post('/removeExerciseFromUser', removeExerciseFromUser);
+// app.post('/removeExerciseFromUser', removeExerciseFromUser);
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -366,9 +366,9 @@ function addExerciseToUser(req, res) {
   })
 }
 
-function removeExerciseFromUser(req, res) {
-  console.log('in remove in server', req.body)
-}
+// function removeExerciseFromUser(req, res) {
+//   console.log('in remove in server', req.body)
+// }
 
 
 

@@ -1,6 +1,6 @@
 var ExerciseCard = (props) => {
   var card = props.exerciseCard;
-  console.log('exercise card props', card)
+  console.log('exercise card props', card);
   return (
     <div>
       <div className="ex-card-name">
@@ -19,7 +19,6 @@ var ExerciseCard = (props) => {
       <div>
         <img src={card.picture}/>
       </div>
-
     </div>
   )
 }
