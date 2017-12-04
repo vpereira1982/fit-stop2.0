@@ -16,7 +16,10 @@ class App extends React.Component {
       elapsedTime: null,
       completedWorkouts: [],
       expendedCalories: 0,
-      userWeight: 160
+      userWeight: 160,
+      warmupList: null,
+      workoutList: null,
+      cooldownList: null
     };
 
     this.getUserInfo();
@@ -28,6 +31,7 @@ class App extends React.Component {
     this.goToSignUp = this.goToSignUp.bind(this);
     this.goToProfile = this.goToProfile.bind(this);
     this.getWarmups = this.getWarmups.bind(this);
+    this.getAllExercises = this.getAllExercises.bind(this);
     this.getExerciseByType = this.getExerciseByType.bind(this);
     this.getWorkoutHistory = this.getWorkoutHistory.bind(this);
     this.sendWorkoutData = this.sendWorkoutData.bind(this);
@@ -37,7 +41,8 @@ class App extends React.Component {
     this.createWorkout = this.createWorkout.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
     // this.getWarmups();
-    this.getExerciseByType('cooldown');
+    // this.getExerciseByType('cooldown');
+    this.getAllExercises();
   }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -127,6 +132,24 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  getAllExercises() {
+    $.ajax({
+      method: 'GET',
+      url: '/allExercises',
+      success:(data) => {
+        console.log('success! all exercises::::', data);
+        this.setState({
+          warmupList: data[0],
+          workoutList: data[1],
+          cooldownList: data[2]
+        })
+      },
+      error: (err) => {
+        console.log('err getting all exercises in client')
+      }
+    })
+  }
+
   getExerciseByType(type) {
     $.ajax({
       method: 'GET',
@@ -134,7 +157,7 @@ class App extends React.Component {
       dataType: 'json',
       data: {type: type},
       success: (data) => {
-        console.log('success! client side: workouts', data)
+        console.log('success! client side: workouts', data);
       },
       error: (err) => {
         console.log('err getting workouts in client!', err)
@@ -410,7 +433,7 @@ timer() {
         return (<CreateWorkout submitExercise={this.submitExercise} visible={this.state.visible} />);
       }
       if (this.state.currentState === 'Profile') {
-        return ( <Profile />)
+        return ( <Profile warmupList={this.state.warmupList} workoutList={this.state.workoutList} cooldownList={this.state.cooldownList}/>)
       }
 
       if (this.state.currentState === 'Summary') {
