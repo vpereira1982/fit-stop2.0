@@ -19,7 +19,10 @@ var Profile = (props) => {
     />
   }
   if (props.profileView === 'ownerExerciseList') {
-    view = <OwnerExerciseList ownerExerciseList={props.ownerExerciseList}/>
+    view = <OwnerExerciseList
+      ownerExerciseList={props.ownerExerciseList}
+      removeExerciseFromUser={props.removeExerciseFromUser}
+    />
   }
   if (props.profileView === 'exerciseCard') {
     view = <ExerciseCard

@@ -2,7 +2,7 @@ var FitStopList = (props) => {
   var wup = props.warmupList.filter(ex => !ex.createdBy);
   var work = props.workoutList.filter(ex => !ex.createdBy);
   var cool = props.cooldownList.filter(ex => !ex.createdBy);
-  // console.log('fitsopt', props)
+  console.log('fitsopt', props)
   return (
     <div className="fitStopList">
       <div className="list">
