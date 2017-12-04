@@ -40,6 +40,8 @@ class App extends React.Component {
     this.getWorkoutList = this.getWorkoutList.bind(this);
     this.sendWorkoutData = this.sendWorkoutData.bind(this);
     this.addExerciseToUser = this.addExerciseToUser.bind(this);
+    this.removeExerciseFromUser = this.removeExerciseFromUser.bind(this);
+
     this.logOut = this.logOut.bind(this);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -138,6 +140,7 @@ class App extends React.Component {
   }
 
   changeProfileView(view, exercise) {
+    console.log('in change view', view)
     if (exercise) {
       this.setState({
         profileView: view,
@@ -152,6 +155,26 @@ class App extends React.Component {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  removeExerciseFromUser(exercise) {
+    console.log('exercise to be deleted', exercise);
+    // var Obj = {
+    //   username: this.state.username,
+    //   exercise: exercise
+    // };
+    // $.ajax({
+    //   method: 'post',
+    //   url: '/removeExerciseFromUser',
+    //   data: Obj,
+    //   complete:(data) => {
+    //     console.log('successfully deleted')
+    //     // this.getWorkoutList();
+    //   },
+    //   error: (err) => {
+    //     console.log('could not remove exercise from user')
+    //   }
+    // })
+  }
+
   addExerciseToUser(exercise) {
     // console.log('user', this.state.username)
     // console.log('exercise to be added', exercise)
@@ -481,7 +504,8 @@ timer() {
       if (this.state.currentState === 'Profile') {
         return ( <Profile
           ownerExerciseList={this.state.ownerExerciseList}
-          profileView={this.state.profileView}
+          removeExerciseFromUser={this.removeExerciseFromUser}
+          ProfileView={this.state.profileView}
           addExerciseToUser={this.addExerciseToUser}
           changeProfileView={this.changeProfileView}
           warmupList={this.state.warmupList}
