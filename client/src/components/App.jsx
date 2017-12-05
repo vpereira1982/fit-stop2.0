@@ -153,7 +153,6 @@ class App extends React.Component {
   The following functions send requests to the server
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
   removeExerciseFromUser(exercise) {
-    console.log('exercise to be deleted', exercise);
     var Obj = {
       username: this.state.username,
       exercise: exercise
