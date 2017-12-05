@@ -67,5 +67,4 @@ var Summary = (props) => {
     )
 };
 
-
 window.Summary = Summary;

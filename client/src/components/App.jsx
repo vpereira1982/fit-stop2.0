@@ -16,7 +16,7 @@ class App extends React.Component {
       elapsedTime: null,
       completedWorkouts: [],
       expendedCalories: 0,
-      userWeight: 160,
+      userWeight: '',
       warmupList: null,
       workoutList: null,
       cooldownList: null,
@@ -48,6 +48,7 @@ class App extends React.Component {
     this.createWorkout = this.createWorkout.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
     this.changeProfileView = this.changeProfileView.bind(this);
+    this.getUserWeight = this.getUserWeight.bind(this);
     this.getAllExercises();
   }
 
@@ -146,6 +147,13 @@ class App extends React.Component {
     } else {
       this.setState({profileView: view});
     }
+  }
+
+  getUserWeight(e) {
+    var weight = e.target.value;
+    this.setState({
+      userWeight: weight
+    });
   }
 
 
@@ -429,11 +437,12 @@ class App extends React.Component {
     this.setState({interval: interval});
   }
 
-timer() {
+  timer() {
     var completedWorkouts = this.state.completedWorkouts;
     var current = this.state.time;
     var elapsedTime = 900 - current;
     var caloriesBurned = 0;
+    var weightInKgs = this.state.userWeight / 2.2;
     current--;
     this.setState({time: current, elapsedTime: elapsedTime});
     if (this.state.time <= 0) {
@@ -442,7 +451,7 @@ timer() {
       var next = this.state.currentExercise;
       var currentExercise = this.state.currentWorkout[next];
       completedWorkouts.push(currentExercise)
-      var expCal = this.state.expendedCalories + this.state.userWeight * currentExercise.metValue * (1 / 60);
+      var expCal = this.state.expendedCalories + weightInKgs * currentExercise.metValue * (1 / 60);
       this.setState({expendedCalories: Math.round(expCal)});
       next++;
       this.setState({currentExercise: next, completedWorkouts: completedWorkouts});
@@ -476,7 +485,7 @@ timer() {
   render() {
     var toBeRendered = () => {
       if (this.state.currentState === 'Dashboard') {
-        return (<Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} loggedIn={this.state.loggedIn} />);
+        return (<Dashboard goToCountdown={this.goToCountdown} workoutHistory={this.state.workoutHistory} loggedIn={this.state.loggedIn} getUserWeight={this.getUserWeight} userWeight={this.state.userWeight}/>);
       }
       if (this.state.currentState === 'Login') {
           return (<Login login={this.login} goToDashboard={this.goToDashboard}/>);
@@ -517,6 +526,7 @@ timer() {
           formatTime={this.formatSummaryTime}
           completedWorkouts={this.state.completedWorkouts}
           expendedCalories={this.state.expendedCalories}/>);
+
       }
     }
 
