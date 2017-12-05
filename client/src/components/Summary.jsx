@@ -20,7 +20,8 @@ var Summary = (props) => {
         <h3 className="summaryTitle"> Date: </h3> {props.workoutDate}
         <h3 className="summaryTitle"> Length of Workout: </h3> {props.formatTime(props.elapsedTime)}
 
-         <h3 className="summaryTitle"> Warmup: </h3>
+
+         {warmups.length > 0 ? <h3 className="summaryTitle"> Warmup Exercises: </h3> : null}
          {warmups.length > 0 ? warmups.map( item => {
            return (
              <div>
@@ -32,7 +33,7 @@ var Summary = (props) => {
          })
         : null}
 
-        <h3 className="summaryTitle"> Workout: </h3>
+        {mainWorkouts.length > 0 ? <h3 className="summaryTitle"> Workout Exercises: </h3> : null}
         {mainWorkouts.length > 0 ? mainWorkouts.map( item => {
           return (
             <div>
@@ -44,7 +45,8 @@ var Summary = (props) => {
         })
        : null}
 
-       <h3 className="summaryTitle"> Cooldown: </h3>
+
+       {cooldowns.length > 0 ? <h3 className="summaryTitle"> Cooldown Exercises: </h3> : null}
        {cooldowns.length > 0 ? cooldowns.map( item => {
          return (
            <div>
@@ -56,7 +58,8 @@ var Summary = (props) => {
        })
       : null}
 
-      <h3 className="summaryTitle">Calories expended: </h3>{props.expendedCalories}
+      <h3 className="summaryTitle">*Estimated Calories Burned: </h3>{props.expendedCalories}
+      <p>*Only accurate with weight input</p>
 
       </div>
       <span className="summaryQuote">"Good things come to those who sweat."</span>
