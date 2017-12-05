@@ -170,6 +170,8 @@ function saveWorkout(req, res) {
     type: req.body.type,
     name: req.body.name,
     description: req.body.description,
+    difficulty: req.body.difficulty,
+    muscleGroup: req.body.musclegroup,
     videoURL: req.body.videoURL,
     createdBy: req.session.name,
     videoFilename: req.file.filename

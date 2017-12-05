@@ -33,10 +33,27 @@ class CreateWorkout extends React.Component {
           </label>
           <br />
         </div>
+        <div>
           <label className="createWorkout">Description:
             <input type="text" name="description" className="description" required />
           </label>
           <br />
+        </div>
+        <div>
+          <label className="createWorkout">Difficulty:
+            <select className="workoutType" name="difficulty" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label className="createWorkout">Muscle Group:
+            <input type="text" name="musclegroup" required />
+          </label>
+          <br />
+        </div>
         <div>
           <label className="createWorkout">Upload Video:
             <input type="file" name="videoFile" accept="video/*" />
