@@ -6,7 +6,7 @@ body {
 }
 
 .App {
-  width: 60%;
+  width: 70%;
   margin: auto;
 }
 
@@ -14,10 +14,21 @@ body {
   display: inline-block;
   float: right;
   margin-right: 10px;
+  font-size:20px;
+}
+
+.logo {
+  letter-spacing: 0.1em;
+}
+
+.version {
+  font-size: 15px;
 }
 
 .header {
-  background-color: #3b8fb5;
+  background: -moz-linear-gradient(top, #008fb1 0%, #009ec3 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #008fb1 0%,#009ec3 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #008fb1 0%,#009ec3 100%);
   height: 40px;
   padding: 12px;
   padding-bottom: 40px;
@@ -103,7 +114,7 @@ body {
   padding: 10px 20px;
   text-decoration: none;
   float: right;
-  margin-top: 12px;
+  margin-top: 15px;
 }
 
 .blackButtons:hover {
