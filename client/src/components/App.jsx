@@ -49,6 +49,7 @@ class App extends React.Component {
     this.submitExercise = this.submitExercise.bind(this);
     this.changeProfileView = this.changeProfileView.bind(this);
     this.getUserWeight = this.getUserWeight.bind(this);
+    this.formatSummaryTime = this.formatSummaryTime.bind(this);
     this.getAllExercises();
   }
 
@@ -304,7 +305,7 @@ class App extends React.Component {
         username: this.state.username,
         date: Date(),
         currentWorkout: this.state.currentWorkout,
-        lengthOfWorkout: this.state.workoutLengthInMins
+        lengthOfWorkout: this.state.elapsedTime
       }),
       contentType: 'application/json',
       dataType: 'json',
