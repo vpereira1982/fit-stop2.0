@@ -94,7 +94,7 @@ app.post('/login', checkLogin);
 app.post('/signup', addSignup);
 app.post('/createworkout', saveWorkout);
 app.post('/addExerciseToUser', addExerciseToUser);
-// app.post('/removeExerciseFromUser', removeExerciseFromUser);
+app.post('/removeExerciseFromUser', removeExerciseFromUser);
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -104,12 +104,10 @@ app.post('/addExerciseToUser', addExerciseToUser);
 
 
 function getWorkoutList(req, res) {
-  // console.log('in getWorkoutList in server', req.query)
   User.findOne({username: req.query.username}, function(err, data) {
     if (err) {
       console.log('err getting owner workout List from db')
     } else {
-      console.log('got owner workout list', data);
       res.status(200).send(data.workoutList);
     }
   })
@@ -142,7 +140,6 @@ function getAllExercises(req, res) {
 }
 
 function getExerciseByType(req, res) {
-  console.log('getting exercises by type...', req.query);
   var typeObj = req.query;
   Exercise.find(typeObj, function(err, data) {
     if (err) {
@@ -155,7 +152,6 @@ function getExerciseByType(req, res) {
 }
 
 function getWarmups(req, res) {
-  console.log('getting warmups frm db...');
   Exercise.find({type: 'warmup'}, function(err, data) {
     if (err) {
       console.log('err getting warmups from db');
@@ -357,18 +353,23 @@ function destroyCookie(req, res) {
 function addExerciseToUser(req, res) {
   User.update({username: req.body.username}, {$push: {workoutList: req.body.exercise}}, function(err, data) {
     if (err) {
-      console.log('err adding exercise');
       res.status(400).end('err not added!')
     } else {
-      // console.log('successfull added exercise!', data);
       res.status(200).send('successfully added exercise to user');
     }
   })
 }
 
-// function removeExerciseFromUser(req, res) {
-//   console.log('in remove in server', req.body)
-// }
+function removeExerciseFromUser(req, res) {
+  var ex = req.body.exercise;
+  User.update({username: req.body.username}, {$pull: {workoutList: {name: ex.name}}}, function(err, data) {
+    if (err) {
+      console.log('err deleting from db')
+    } else {
+      res.status(200).send('successfully deleted');
+    }
+  })
+}
 
 
 

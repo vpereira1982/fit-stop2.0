@@ -138,7 +138,6 @@ class App extends React.Component {
   }
 
   changeProfileView(view, exercise) {
-    console.log('in change view', view)
     if (exercise) {
       this.setState({
         profileView: view,
@@ -155,22 +154,21 @@ class App extends React.Component {
 * * * * * * * * * * * * * * * * * * * * * * * * * * */
   removeExerciseFromUser(exercise) {
     console.log('exercise to be deleted', exercise);
-    // var Obj = {
-    //   username: this.state.username,
-    //   exercise: exercise
-    // };
-    // $.ajax({
-    //   method: 'post',
-    //   url: '/removeExerciseFromUser',
-    //   data: Obj,
-    //   complete:(data) => {
-    //     console.log('successfully deleted')
-    //     // this.getWorkoutList();
-    //   },
-    //   error: (err) => {
-    //     console.log('could not remove exercise from user')
-    //   }
-    // })
+    var Obj = {
+      username: this.state.username,
+      exercise: exercise
+    };
+    $.ajax({
+      method: 'post',
+      url: '/removeExerciseFromUser',
+      data: Obj,
+      complete:(data) => {
+        this.getWorkoutList();
+      },
+      error: (err) => {
+        console.log('could not remove exercise from user')
+      }
+    })
   }
 
   addExerciseToUser(exercise) {
@@ -283,7 +281,6 @@ class App extends React.Component {
         lengthOfWorkout: this.state.workoutLengthInMins
       },
       complete: (data) => {
-        console.log('exercise data:', data);
         this.setState({currentWorkout: JSON.parse(data.responseText)})
       },
       error: function(err) {

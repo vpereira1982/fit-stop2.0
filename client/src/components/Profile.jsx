@@ -1,5 +1,5 @@
 var Profile = (props) => {
-  console.log('Profile props', props)
+  // console.log('Profile props', props)
   let view = null;
   if (props.profileView === 'profile') {
     view = <UserProfile />;
@@ -9,7 +9,7 @@ var Profile = (props) => {
       warmupList={props.warmupList}
       workoutList={props.workoutList}
       cooldownList={props.cooldownList}
-      // changeProfileView={props.changeProfileView}
+      changeProfileView={props.changeProfileView}
     />;
   }
   if (props.profileView === 'usersList') {
@@ -23,6 +23,8 @@ var Profile = (props) => {
     view = <OwnerExerciseList
       ownerExerciseList={props.ownerExerciseList}
       removeExerciseFromUser={props.removeExerciseFromUser}
+      changeProfileView={props.changeProfileView}
+
     />;
   }
   if (props.profileView === 'exerciseCard') {
@@ -31,7 +33,12 @@ var Profile = (props) => {
       addExerciseToUser={props.addExerciseToUser}
     />;
   }
-  console.log('view', view)
+  if (props.profileView === 'ownerExerciseCard') {
+    view = <OwnerExerciseCard
+      exerciseCard={props.exerciseCard}
+      removeExerciseFromUser={props.removeExerciseFromUser}
+    />;
+  }
   return (
     <div className="user-profile">
       Welcome to Profile page

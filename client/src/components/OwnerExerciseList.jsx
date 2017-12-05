@@ -1,5 +1,4 @@
 var OwnerExerciseList = (props) => {
-  console.log('in owner ex list', props)
   var warm = props.ownerExerciseList.filter(ex => ex.type === 'warmup');
   var work = props.ownerExerciseList.filter(ex => ex.type === 'workout');
   var cool = props.ownerExerciseList.filter(ex => ex.type === 'cooldown');
@@ -9,7 +8,7 @@ var OwnerExerciseList = (props) => {
       <h2>Your customized exercise list...</h2><br></br>
       <div className="list">
         <h3>Warmups</h3>
-        {warm.map((ex, ind) => (<div onClick={() => props.removeExerciseFromUser(ex)}key={ind}>{ex.name}</div>))}
+        {warm.map((ex, ind) => (<div onClick={() => props.changeProfileView('ownerExerciseCard', ex)}key={ind}>{ex.name}</div>))}
       </div>
       <div className="list">
         <h3>Workouts</h3>
