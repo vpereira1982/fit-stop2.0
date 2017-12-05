@@ -7,15 +7,15 @@ var UsersExerciseList = (props) => {
     <div className="usersExerciseList">
       <div className="list">
         <h3>Warmups</h3>
-        {wup.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
+        {wup.map((ex, ind) => (<div onClick={() => props.changeProfileView('exerciseCard', ex)} key={ind}>{ex.name}</div>))}
       </div>
       <div className="list">
         <h3>Workouts</h3>
-        {work.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
+        {work.map((ex, ind) => (<div onClick={() => props.changeProfileView('exerciseCard', ex)} key={ind}>{ex.name}</div>))}
       </div>
       <div className="list">
         <h3>Cooldowns</h3>
-        {cool.map((ex, ind) => (<div key={ind}>{ex.name}</div>))}
+        {cool.map((ex, ind) => (<div onClick={() => props.changeProfileView('exerciseCard', ex)} key={ind}>{ex.name}</div>))}
       </div>
     </div>
   )

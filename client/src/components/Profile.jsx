@@ -17,6 +17,7 @@ var Profile = (props) => {
       warmupList={props.warmupList}
       workoutList={props.workoutList}
       cooldownList={props.cooldownList}
+      changeProfileView={props.changeProfileView}
     />;
   }
   if (props.profileView === 'ownerExerciseList') {
