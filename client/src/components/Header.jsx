@@ -10,7 +10,11 @@ var Header = (props) => (
     {props.showButtons && !props.loggedIn && (<button className='blackButton' onClick={props.goToLogin}>Log In</button>)}
     {!props.loggedIn && props.showButtons && (<button className='blackButton' onClick={props.goToSignUp}>Sign Up</button>)}
     <div>
-      <h1> FitStop 2.0 <span className='username'>{props.username}</span></h1>
+      <h1>
+        <span className="logo"> FitStop </span>
+        <span className="version">v2.0</span>
+        <span className='username'>{props.username}</span>
+      </h1>
     </div>
   </div>
 );
