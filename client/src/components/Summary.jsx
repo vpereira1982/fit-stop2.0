@@ -11,8 +11,6 @@ var Summary = (props) => {
     return item.type === 'cooldown';
   });
 
-  console.log("In summary:", warmups, mainWorkouts, cooldowns);
-
  return (
     <div className="summary">
       <h1>Workout Summary</h1>
