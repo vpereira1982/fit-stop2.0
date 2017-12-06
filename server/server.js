@@ -195,7 +195,6 @@ function saveWorkout(req, res) {
   });
 }
 
-
 function getHistory(req, res) {
   var name = req.query.username;
   User.findOne({username: name}, function(err, data) {
