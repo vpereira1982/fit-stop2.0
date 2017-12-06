@@ -28,7 +28,7 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + '_' + file.originalname);
   }
 });
-var upload = multer({'storage': storage}).single('videoFile');
+var upload = multer({'storage': storage}).fields([{name:'videoFile', maxcount: 1}, {name: 'pictureFile', maxcount: 1}]);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
   Middleware Load
@@ -164,17 +164,20 @@ function getWarmups(req, res) {
 
 function saveWorkout(req, res) {
   console.log('this is req.body', req.body);
-  console.log('this is req.file', req.file);
+  console.log('this is req.files', req.files);
+
+  let picture = !!req.files.pictureFile ? req.files.pictureFile[0].filename : req.body.pictureURL;
+  let video = !!req.files.videoFile ? req.files.videoFile[0].filename : req.body.videoURL;
 
   var newWorkout = {
     type: req.body.type,
     name: req.body.name,
     description: req.body.description,
     difficulty: req.body.difficulty,
+    picture,
     muscleGroup: req.body.musclegroup,
-    videoURL: req.body.videoURL,
-    createdBy: req.session.name,
-    videoFilename: req.file.filename
+    videoURL: video,
+    createdBy: req.session.name
   };
 
   Exercise.find({createdBy: req.session.name, name: req.body.name}, function(err, user) {
@@ -191,7 +194,6 @@ function saveWorkout(req, res) {
     }
   });
 }
-
 
 function getHistory(req, res) {
   var name = req.query.username;
