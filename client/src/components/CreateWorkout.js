@@ -9,8 +9,6 @@ class CreateWorkout extends React.Component {
 
     let form = document.querySelector("form");
     let formData = new FormData(form);
-    console.log(form);
-    console.log(formData.get('name'));
     this.props.submitExercise(formData);
   }
 
@@ -63,6 +61,18 @@ class CreateWorkout extends React.Component {
         <div>
           <label className="createWorkout">Video URL (optional):
             <input type="text" name="videoURL" />
+          </label>
+          <br />
+        </div>
+        <div>
+          <label className="createWorkout">Upload Picture:
+            <input type="file" name="pictureFile" accept="image/*" />
+          </label>
+          <br />
+        </div>
+        <div>
+          <label className="createWorkout"> Picture URL (optional):
+            <input type="text" name="pictureURL" />
           </label>
           <br />
         </div>
