@@ -337,6 +337,7 @@ function addSignup(req, res) {
           if (err) {
             console.log(err);
           } else {
+            req.session.name = name;
             res.status(200).send('User Created');
           }
         });

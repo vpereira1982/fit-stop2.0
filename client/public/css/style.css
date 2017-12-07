@@ -303,6 +303,13 @@ body {
   color: #000;
 }
 
+.profile-nav-buttons {
+}
+
+.userProfilePage {
+  float: left;
+}
+
 label {
   display: inline-block;
   float: left;
