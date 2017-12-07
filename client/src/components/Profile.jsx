@@ -42,12 +42,11 @@ var Profile = (props) => {
   }
   return (
     <div className="user-profile">
-      Welcome to Profile page
       <div className="profile-nav-buttons">
-        <button className="tablink" id="defaultOpen" onClick={() => props.changeProfileView('profile')}>Profile</button>
-        <button className="tablink" onClick={() => props.changeProfileView('ownerExerciseList')}>Your Exercise List</button>
-        <button className="tablink" onClick={() => props.changeProfileView('fitStopList')}>FitStop Exercise List</button>
-        <button className="tablink" onClick={() => props.changeProfileView('usersList')}>Users Exercise List</button>
+        <button className="blackButton tablink" id="defaultOpen" onClick={() => props.changeProfileView('profile')}>Profile</button>
+        <button className="blackButton tablink" onClick={() => props.changeProfileView('ownerExerciseList')}>Your Exercise List</button>
+        <button className="blackButton tablink" onClick={() => props.changeProfileView('fitStopList')}>FitStop Exercise List</button>
+        <button className="blackButton tablink" onClick={() => props.changeProfileView('usersList')}>Users Exercise List</button>
       </div>
       <div>
         {view}

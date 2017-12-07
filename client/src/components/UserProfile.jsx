@@ -1,6 +1,6 @@
 var UserProfile = (props) => {
   return(
-    <div>User Profile Page
+    <div className="userProfilePage">User Profile
     </div>
   )
 }
